@@ -3,8 +3,8 @@ import java.util.Scanner;
 public class UltimateTTTUserInput {
     private UltimateTTT ultimateTTT;
     private Scanner input = new Scanner(System.in);
-    static State user;
-    static State bot;
+    static Mark user;
+    static Mark bot;
 
     public UltimateTTTUserInput(){
         ultimateTTT = new UltimateTTT();
@@ -36,11 +36,11 @@ public class UltimateTTTUserInput {
         char value = input.next().trim().charAt(0);
 
         if (Character.toLowerCase(value) == 'x'){
-            user = State.X;
-            bot = State.O;
+            user = Mark.X;
+            bot = Mark.O;
         }else if (Character.toLowerCase(value) == 'o'){
-            user = State.O;
-            bot = State.X;
+            user = Mark.O;
+            bot = Mark.X;
         }else{
             System.err.println("The character that was inputted was not an X or an O.");
             setupUser();

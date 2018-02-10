@@ -1,10 +1,13 @@
-public class NineBoard extends Board {
+import java.util.ArrayList;
+
+public class NineBoard implements State{
 
     private int numBoards = 9;
     private Board[][] nineBoard = new Board[numBoards/3][numBoards/3];
-    protected State turn = State.X;
-    protected int activeBoard = -1;
-    protected int previousBoard = -1;
+    private Mark turn = Mark.X;
+    private int activeBoard = -1;
+    private int previousBoard = -1;
+    private Mark winner = Mark.BLANK;
 
     public NineBoard(){
         initializeBoard();
@@ -18,14 +21,15 @@ public class NineBoard extends Board {
         int boardCol = (input - 1)%3;
         return nineBoard[boardRow][boardCol];
     }
-    @Override public void initializeBoard(){
+
+    public void initializeBoard(){
         for (int i = 0; i < numBoards/3; i++){
             for (int j = 0; j<numBoards/3; j++){
                 nineBoard[i][j] = new Board();
             }
         }
     }
-    @Override public void printBoard(){
+    public void printBoard(){
 
         for (int boardRow = 0; boardRow<3; boardRow++){
 
@@ -38,8 +42,8 @@ public class NineBoard extends Board {
 
                     for (int positionCol = 0; positionCol<numBoards/3; positionCol++){
 
-                        State mark = nineBoard[boardRow][boardCol].getTileValueWith(positionRow, positionCol);
-                        if (mark == State.BLANK) {
+                        Mark mark = nineBoard[boardRow][boardCol].getTileValueWith(positionRow, positionCol);
+                        if (mark == Mark.BLANK) {
                             System.err.print("_");
                         }else{
                             System.err.print(mark);
@@ -66,14 +70,14 @@ public class NineBoard extends Board {
 
     public boolean isBoardAvailable(int boardInput){
         Board board = getBoardWith(boardInput);
-        if (board.isGameOver() && board.getWinner() == State.BLANK){
+        if (board.isGameOver() && board.getWinner() == Mark.BLANK){
             return false;
         }
 
         return true;
     }
 
-    @Override public boolean isGameOver(){
+    public boolean isGameOver(){
 
 
         for (int i = 0; i<(numBoards/3); i++){
@@ -81,7 +85,7 @@ public class NineBoard extends Board {
             for (int j = 0; j<(numBoards/3); j++){
                 Board board = nineBoard[i][j];
                 // someone won
-                if (board.isGameOver() && board.getWinner() != State.BLANK){
+                if (board.isGameOver() && board.getWinner() != Mark.BLANK){
                     winner = board.getWinner();
                     return true;
                 }
@@ -98,17 +102,17 @@ public class NineBoard extends Board {
 
     public void undoMove(int activeBoard, int position){
         Board board = getBoardWith(activeBoard);
-        board.undoMove(position);
+        board.undoMove(activeBoard, position);
         changeTurn();
         this.activeBoard = previousBoard;
         previousBoard = -1;
     }
 
 
-    public boolean move(int board, int position, State user){
+    public boolean move(int board, int position, Mark user){
         int boardRow = (board - 1)/3;
         int boardCol = (board - 1)%3;
-        if (!nineBoard[boardRow][boardCol].move(position, user)){
+        if (!nineBoard[boardRow][boardCol].move(activeBoard, position, user)){
             return false;
         }
         previousBoard = activeBoard;
@@ -117,4 +121,45 @@ public class NineBoard extends Board {
         return true;
     }
 
+    public Mark getWinner(){
+        return winner;
+    }
+
+    public Mark getTurn(){
+        return turn;
+    }
+
+    public void changeTurn(){
+        turn = turn == Mark.X ? Mark.O : Mark.X;
+    }
+
+    public ArrayList<Move> getPossibleMoves() {
+        ArrayList<Move> arr = new ArrayList<Move>();
+
+        if (activeBoard != -1){
+            if (!isBoardAvailable(activeBoard)){
+                activeBoard = -1;
+            }
+        }
+
+        if (activeBoard == -1){
+            for (int boardNo = 1; boardNo<=9; boardNo++){
+                if (isBoardAvailable(boardNo)){
+                    for (int positionNo = 1; positionNo<=9;positionNo++){
+                        if (!getBoardWith(boardNo).isTileTaken(positionNo)){
+                            arr.add(new Move(boardNo, positionNo));
+                        }
+                    }
+                }
+            }
+        }else{
+            for (int positionNo = 1; positionNo<=9;positionNo++){
+                if (!getBoardWith(activeBoard).isTileTaken(positionNo)){
+                    arr.add(new Move(activeBoard, positionNo));
+                }
+            }
+        }
+
+        return arr;
+    }
 }

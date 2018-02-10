@@ -1,10 +1,10 @@
 import java.util.ArrayList;
-public class Board {
+public class Board implements State {
     private int boardSize = 3;
-    private State[][] board = new State[boardSize][boardSize];
-    private State turn = State.X;
+    private Mark[][] board = new Mark[boardSize][boardSize];
+    private Mark turn = Mark.X;
     private boolean isGameOver = false;
-    public State winner = State.BLANK;
+    private Mark winner = Mark.BLANK;
 
     public Board(){
         initializeBoard();
@@ -12,12 +12,12 @@ public class Board {
 
 
 
-    public State getTurn(){
+    public Mark getTurn(){
         return turn;
     }
 
     public void changeTurn(){
-        turn = turn == State.X ? State.O: State.X;
+        turn = turn == Mark.X ? Mark.O: Mark.X;
     }
 
 
@@ -25,43 +25,32 @@ public class Board {
     public  boolean isGameOver(){
         return isGameOver;
     }
-    public  boolean isGameFull() {
-        return isGameOver && getWinner() == State.BLANK;
-    } public State getWinner(){
-        return winner;
-    }
+//    public  boolean isGameFull() {
+//        return isGameOver && getWinner() == Mark.BLANK;
+//    } public Mark getWinner(){
+//        return winner;
+//    }
 
     public void initializeBoard(){
         for (int i = 0; i < boardSize; i++){
             for (int j = 0; j<boardSize; j++){
-                board[i][j] = State.BLANK;
+                board[i][j] = Mark.BLANK;
             }
         }
-
-//        board[0][0] = State.X;
-//        board[0][1] = State.O;
-//        board[0][2] = State.BLANK;
-//        board[1][0] = State.BLANK;
-//        board[1][1] = State.O;
-//        board[1][2] = State.BLANK;
-//        board[2][0] = State.O;
-//        board[2][1] = State.X;
-//        board[2][2] = State.X;
-
     }
 
-    public ArrayList<Integer> getPossibleMoves(){
-        ArrayList<Integer> arr = new ArrayList<>();
+    public ArrayList<Move> getPossibleMoves(){
+        ArrayList<Move> arr = new ArrayList<>();
         for (int i = 1; i<=9; i++){
             if (!isTileTaken(i)){
-                arr.add(i);
+                arr.add(new Move(0, i));
             }
         }
         return arr;
     }
-    private boolean isTileTaken(int input){
-        State tile = getTileValueWith(input);
-        if (tile == State.BLANK){
+    public boolean isTileTaken(int input){
+        Mark tile = getTileValueWith(input);
+        if (tile == Mark.BLANK){
             return false;
         }
 
@@ -69,17 +58,17 @@ public class Board {
         return true;
     }
 
-    public State getTileValueWith(int input){
+    public Mark getTileValueWith(int input){
         int row = (input - 1) / boardSize;
         int col = (input - 1) % boardSize;
         return board[row][col];
     }
 
-    public State getTileValueWith(int row, int col){
+    public Mark getTileValueWith(int row, int col){
         return board[row][col];
     }
 
-    public boolean move(int input, State player){
+    public boolean move(int boardNo, int input, Mark player){
 
         if (isTileTaken(input)){
             return false;
@@ -100,25 +89,25 @@ public class Board {
 
         if (checkDraw()){
             isGameOver = true;
-            winner = State.BLANK;
+            winner = Mark.BLANK;
         }
 
         changeTurn();
         return true;
     }
 
-    public void undoMove(int input){
+    public void undoMove(int boardInput, int input){
 
         int row = (input - 1) / boardSize;
         int col = (input - 1) % boardSize;
-        winner = State.BLANK;
+        winner = Mark.BLANK;
         isGameOver = false;
         changeTurn();
-        board[row][col] = State.BLANK;
+        board[row][col] = Mark.BLANK;
     }
 
 
-    private boolean checkColumn(int col, State mark){
+    private boolean checkColumn(int col, Mark mark){
         for (int i = 0; i < boardSize; i++){
             if (board[i][col] != mark){
                 break;
@@ -131,7 +120,7 @@ public class Board {
 
         return false;
     }
-    private boolean checkRow(int row, State mark){
+    private boolean checkRow(int row, Mark mark){
         for (int i = 0; i < boardSize; i++){
             if (board[row][i] != mark){
                 break;
@@ -146,7 +135,7 @@ public class Board {
 
     }
 
-    private boolean checkDiag(int row, int col, State mark){
+    private boolean checkDiag(int row, int col, Mark mark){
         if (row == col){
             for (int i = 0; i < boardSize; i++){
                 if(board[i][i] != mark){
@@ -163,7 +152,7 @@ public class Board {
         return false;
     }
 
-    private boolean checkAntiDiag(int row, int col, State mark){
+    private boolean checkAntiDiag(int row, int col, Mark mark){
         if (row + col == boardSize - 1){
             for (int i = 0; i < boardSize; i++){
                 if(board[i][boardSize - 1 - i] != mark){
@@ -188,17 +177,15 @@ public class Board {
             }
         }
         return true;
-//                This is more efficient. doing above for testing purposes
-//        return moveCount == boardSize * boardSize ;
-
     }
+
     public void printBoard() {
         for (int i = 0; i < boardSize; i++){
             System.err.println("+---+---+---+");
             for (int j = 0; j < boardSize; j++){
                 System.err.print("| ");
 
-                if (board[i][j] == State.BLANK){
+                if (board[i][j] == Mark.BLANK){
                     System.err.print("_");
                 }else {
                     System.err.print(board[i][j]);
@@ -211,6 +198,9 @@ public class Board {
         System.err.println("+---+---+---+");
     }
 
+    public Mark getWinner(){
+        return winner;
+    }
 
 
 

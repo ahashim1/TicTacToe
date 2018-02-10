@@ -2,8 +2,8 @@ import java.util.Scanner;
 public class UserInput {
     private Board board;
     private Scanner input = new Scanner(System.in);
-    static State user;
-    static State bot;
+    static Mark user;
+    static Mark bot;
     public UserInput(){
         board = new Board();
     }
@@ -34,11 +34,11 @@ public class UserInput {
         char value = input.next().trim().charAt(0);
 
         if (Character.toLowerCase(value) == 'x'){
-            user = State.X;
-            bot = State.O;
+            user = Mark.X;
+            bot = Mark.O;
         }else if (Character.toLowerCase(value) == 'o'){
-            user = State.O;
-            bot = State.X;
+            user = Mark.O;
+            bot = Mark.X;
         }else{
             System.err.println("The character that was inputted was not an X or an O.");
             setupUser();
@@ -50,7 +50,7 @@ public class UserInput {
         if (!(value >= 1 && value <= 9)){
             System.err.println("Please enter a tile from 1-9");
             getPlayerMove();
-        }else if (!board.move(value, user)){
+        }else if (!board.move(0, value, user)){
             System.err.println("That tile is taken!");
             getPlayerMove();
         }
@@ -64,9 +64,8 @@ public class UserInput {
 
     public void getAIMove(){
         AdversarialSearch search = new AdversarialSearch(user, bot, board);
-        int move = search.getAIMove();
-        System.out.println(move);
-        board.move(move, bot);
+        Move move = search.getAIMove();
+        board.move(move.getBoard(), move.getPosition(), bot);
 
     }
 

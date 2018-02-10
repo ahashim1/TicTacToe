@@ -4,8 +4,8 @@ public class NineBoardUserInput {
 
     private NineBoard nineBoard;
     private Scanner input = new Scanner(System.in);
-    static State user;
-    static State bot;
+    static Mark user;
+    static Mark bot;
 
     public NineBoardUserInput(){
         nineBoard = new NineBoard();
@@ -37,11 +37,11 @@ public class NineBoardUserInput {
         char value = input.next().trim().charAt(0);
 
         if (Character.toLowerCase(value) == 'x'){
-            user = State.X;
-            bot = State.O;
+            user = Mark.X;
+            bot = Mark.O;
         }else if (Character.toLowerCase(value) == 'o'){
-            user = State.O;
-            bot = State.X;
+            user = Mark.O;
+            bot = Mark.X;
         }else{
             System.err.println("The character that was inputted was not an X or an O.");
             setupUser();

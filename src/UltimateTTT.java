@@ -12,15 +12,15 @@ public class UltimateTTT extends NineBoard {
         return globalBoard.isGameOver();
     }
 
-    public boolean move(int board, int position, State user){
+    public boolean move(int board, int position, Mark user){
         if (!nineBoard.move(board, position, user)){
             return false;
         }
 
 
         Board boardToCheck = nineBoard.getBoardWith(board);
-        if (boardToCheck.isGameOver() && boardToCheck.getWinner() != State.BLANK){
-            globalBoard.move(board, boardToCheck.getWinner());
+        if (boardToCheck.isGameOver() && boardToCheck.getWinner() != Mark.BLANK){
+            globalBoard.move(0, board, boardToCheck.getWinner());
             globalBoard.printBoard();
         }
 

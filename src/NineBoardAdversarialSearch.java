@@ -1,56 +1,31 @@
 public class NineBoardAdversarialSearch {
-    State user;
-    State bot;
+    Mark user;
+    Mark bot;
     NineBoard nineBoard;
     private int maxDepth = 5;
 
-    public NineBoardAdversarialSearch(State user, State bot, NineBoard nineBoard){
+    public NineBoardAdversarialSearch(Mark user, Mark bot, NineBoard nineBoard){
         this.user = user;
         this.bot = bot;
         this.nineBoard = nineBoard;
     }
 
     public Move getAIMove(){
-        int activeBoard = nineBoard.getActiveBoard();
         int maxScore = -Integer.MAX_VALUE;
-        int move = -1;
+        Move move = null;
 
-        if (activeBoard == -1){
-            for (int i = 1; i<=9; i++){
-                if (nineBoard.isBoardAvailable(i)){
-                    Board board = nineBoard.getBoardWith(i);
-                    for (int j: board.getPossibleMoves()){
-
-                        nineBoard.move(i, j, bot);
-                            int score = minimaxWithAlphaBeta(nineBoard, -Integer.MAX_VALUE, Integer.MAX_VALUE, false, 0);
-                            nineBoard.undoMove(i, j);
-                            if (score > maxScore){
-                                activeBoard = i;
-                                move = j;
-                                maxScore = score;
-                            }
-
-                        }
-
-                }
-            }
-        }else{
-            Board board = nineBoard.getBoardWith(activeBoard);
-            for (int i: board.getPossibleMoves()){
-                nineBoard.move(activeBoard, i, bot);
-                int score = minimaxWithAlphaBeta(nineBoard, -Integer.MAX_VALUE, Integer.MAX_VALUE, false, 0);
-                nineBoard.undoMove(activeBoard, i);
-                if (score > maxScore){
-                    move = i;
-                    maxScore = score;
-                }
-
-
+        for (Move test: nineBoard.getPossibleMoves()) {
+            nineBoard.move(test.getBoard(), test.getPosition(), bot);
+            int score = minimaxWithAlphaBeta(nineBoard, -Integer.MAX_VALUE, Integer.MAX_VALUE, false, 0);
+            nineBoard.undoMove(test.getBoard(), test.getPosition());
+            if (score > maxScore) {
+                move = test;
+                maxScore = score;
             }
         }
 
 
-        return new Move(activeBoard, move);
+        return move;
     }
 
     private int minimaxWithAlphaBeta(NineBoard nineBoard, int alpha, int beta, boolean isMax, int depth){
@@ -68,23 +43,20 @@ public class NineBoardAdversarialSearch {
     }
 
     private int getMaxWithAlphaBeta(NineBoard nineBoard, int alpha, int beta, int depth){
-        int activeBoard = nineBoard.getActiveBoard();
-        Board board = nineBoard.getBoardWith(activeBoard);
+        for (Move test: nineBoard.getPossibleMoves()) {
 
-        for (int i: board.getPossibleMoves()){
+            nineBoard.move(test.getBoard(), test.getPosition(), bot);
+            int score = minimaxWithAlphaBeta(nineBoard, alpha, beta, false, depth++);
 
-            nineBoard.move(activeBoard, i, bot);
-                int score = minimaxWithAlphaBeta(nineBoard, alpha, beta, false, depth++);
+            nineBoard.undoMove(test.getBoard(), test.getPosition());
 
-                nineBoard.undoMove(activeBoard, i);
+            if (score > alpha){
+                alpha = score;
+            }
 
-                if (score > alpha){
-                    alpha = score;
-                }
-
-                if (alpha >= beta){
-                    return alpha;
-                }
+            if (alpha >= beta){
+                return alpha;
+            }
 
         }
 
@@ -92,25 +64,22 @@ public class NineBoardAdversarialSearch {
     }
 
     private int getMinWithAlphaBeta(NineBoard nineBoard, int alpha, int beta, int depth){
-        int activeBoard = nineBoard.getActiveBoard();
-        Board board = nineBoard.getBoardWith(activeBoard);
+        for (Move test: nineBoard.getPossibleMoves()) {
 
-        for (int i: board.getPossibleMoves()){
+            nineBoard.move(test.getBoard(), test.getPosition(), user);
 
-            nineBoard.move(activeBoard, i, user);
+            int score = minimaxWithAlphaBeta(nineBoard, alpha, beta, true, depth++);
 
-                int score = minimaxWithAlphaBeta(nineBoard, alpha, beta, true, depth++);
+            nineBoard.undoMove(test.getBoard(), test.getPosition());
 
-                nineBoard.undoMove(activeBoard, i);
-
-                if (score < beta){
-                    beta = score;
-                }
-
-                if (alpha >= beta){
-                    return beta;
-                }
+            if (score < beta){
+                beta = score;
             }
+
+            if (alpha >= beta){
+                return beta;
+            }
+        }
 
 
         return beta;
