@@ -65,6 +65,7 @@ public class UserInput {
     public void getAIMove(){
         AdversarialSearch search = new AdversarialSearch(user, bot, board);
         Move move = search.getAIMove();
+        System.out.println(move);
         board.move(move.getBoard(), move.getPosition(), bot);
 
     }

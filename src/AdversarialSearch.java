@@ -10,7 +10,7 @@ public class AdversarialSearch {
     public Move getAIMove(){
         int maxScore = -Integer.MAX_VALUE;
         Move move = null;
-//        long start = System.currentTimeMillis();
+        long start = System.currentTimeMillis();
         for (Move test: board.getPossibleMoves()){
             board.move( test.getBoard(), test.getPosition(), bot);
             int score = minimaxWithAlphaBeta(board, -Integer.MAX_VALUE, Integer.MAX_VALUE, false);
@@ -22,8 +22,8 @@ public class AdversarialSearch {
 
 
         }
-//        long elapsed = System.currentTimeMillis() - start;
-//        System.out.println(elapsed);
+        long elapsed = System.currentTimeMillis() - start;
+        System.out.println(elapsed);
         return move;
     }
 
@@ -42,14 +42,15 @@ public class AdversarialSearch {
     }
 
     private int getMaxWithAlphaBeta(Board board, int alpha, int beta){
-
+        Move bestMove = null;
         for (Move i: board.getPossibleMoves()){
+            Board copy = board.deepClone();
+            copy.move(i.getBoard(), i.getPosition(), bot);
+            int score = minimaxWithAlphaBeta(copy, alpha, beta, false);
+//            board.undoMove(i.getBoard(), i.getPosition());
 
-            board.move(i.getBoard(), i.getPosition(), bot);
-            int score = minimaxWithAlphaBeta(board, alpha, beta, false);
-            board.undoMove(i.getBoard(), i.getPosition());
-
-            if (score > alpha){
+            if (score >= alpha){
+                bestMove = i;
                 alpha = score;
             }
             if (alpha >= beta){
@@ -61,26 +62,29 @@ public class AdversarialSearch {
     }
 
     public int getMinWithAlphaBeta(Board board, int alpha, int beta){
+        Move bestMove = null;
+
         for (Move i: board.getPossibleMoves()){
 
+            Board copy = board.deepClone();
+            copy.move(i.getBoard(), i.getPosition(), user);
+            int score = minimaxWithAlphaBeta(copy, alpha, beta, true);
+//            board.undoMove(i.getBoard(), i.getPosition());
 
-            board.move(i.getBoard(), i.getPosition(), user);
-                int score = minimaxWithAlphaBeta(board, alpha, beta, true);
-                board.undoMove(i.getBoard(), i.getPosition());
-
-                if (score < beta){
-                    beta = score;
-                }
+            if (score <= beta){
+                bestMove = i;
+                beta = score;
+            }
 
 
                 if (alpha >= beta){
+
                     return beta;
                 }
 
 
 
         }
-
         return beta;
     }
 
