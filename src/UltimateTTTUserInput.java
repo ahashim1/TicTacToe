@@ -85,7 +85,7 @@ public class UltimateTTTUserInput {
 
     public void getAIMove(){
 
-        NineBoardAdversarialSearch search = new NineBoardAdversarialSearch(user, bot, ultimateTTT);
+        UltimateTTTAdversarialSearch search = new UltimateTTTAdversarialSearch(user, bot, ultimateTTT);
 
         Move move = search.getAIMove();
         System.out.println(move.getBoard() + " " + move.getPosition());

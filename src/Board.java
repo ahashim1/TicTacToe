@@ -1,5 +1,11 @@
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
-public class Board implements State {
+public class Board implements State, Serializable {
     private int boardSize = 3;
     private Mark[][] board = new Mark[boardSize][boardSize];
     private Mark turn = Mark.X;
@@ -10,6 +16,21 @@ public class Board implements State {
         initializeBoard();
     }
 
+    public Board deepClone() {
+        try {
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            ObjectOutputStream oos = new ObjectOutputStream(baos);
+            oos.writeObject(this);
+
+            ByteArrayInputStream bais = new ByteArrayInputStream(baos.toByteArray());
+            ObjectInputStream ois = new ObjectInputStream(bais);
+            return (Board) ois.readObject();
+        } catch (IOException e) {
+            return null;
+        } catch (ClassNotFoundException e) {
+            return null;
+        }
+    }
 
 
     public Mark getTurn(){
@@ -91,6 +112,7 @@ public class Board implements State {
             isGameOver = true;
             winner = Mark.BLANK;
         }
+
 
         changeTurn();
         return true;
