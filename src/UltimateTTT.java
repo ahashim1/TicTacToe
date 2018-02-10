@@ -45,15 +45,15 @@ public class UltimateTTT implements State {
 
     }
 
-    public void undoMove(int board, int position){
-        nineBoard.undoMove(board, position);
-        globalBoard.undoMove(board, position);
-        updateGlobalBoard();
-        changeTurn();
-        this.activeBoard = previousBoard;
-        previousBoard = -1;
-
-    }
+//    public void undoMove(int board, int position){
+//        nineBoard.undoMove(board, position);
+//        globalBoard.undoMove(board, position);
+//        updateGlobalBoard();
+//        changeTurn();
+//        this.activeBoard = previousBoard;
+//        previousBoard = -1;
+//
+//    }
 
     public Mark getTurn(){
         return turn;

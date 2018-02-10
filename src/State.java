@@ -5,7 +5,6 @@ public interface State {
     public void changeTurn();
     public boolean isGameOver();
     public boolean move(int board, int input, Mark player);
-    public void undoMove(int board, int input);
     public void printBoard();
     public Mark getWinner();
     public ArrayList<Move> getPossibleMoves();

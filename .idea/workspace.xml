@@ -3,10 +3,20 @@
   <component name="ChangeListManager">
     <list default="true" id="d09d4095-9e6c-41ce-aef4-5ed8cb897e0b" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/test/TicTacToe/AdversarialSearch.class" afterPath="$PROJECT_DIR$/out/test/TicTacToe/AdversarialSearch.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/test/TicTacToe/UserInput.class" afterPath="$PROJECT_DIR$/out/test/TicTacToe/UserInput.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/test/TicTacToe/Main.class" afterPath="$PROJECT_DIR$/out/test/TicTacToe/Main.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/test/TicTacToe/NineBoard.class" afterPath="$PROJECT_DIR$/out/test/TicTacToe/NineBoard.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/test/TicTacToe/NineBoardAdversarialSearch.class" afterPath="$PROJECT_DIR$/out/test/TicTacToe/NineBoardAdversarialSearch.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/test/TicTacToe/State.class" afterPath="$PROJECT_DIR$/out/test/TicTacToe/State.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/test/TicTacToe/UltimateTTT.class" afterPath="$PROJECT_DIR$/out/test/TicTacToe/UltimateTTT.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/test/TicTacToe/UltimateTTTAdversarialSearch.class" afterPath="$PROJECT_DIR$/out/test/TicTacToe/UltimateTTTAdversarialSearch.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/AdversarialSearch.java" afterPath="$PROJECT_DIR$/src/AdversarialSearch.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/UserInput.java" afterPath="$PROJECT_DIR$/src/UserInput.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Main.java" afterPath="$PROJECT_DIR$/src/Main.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/NineBoard.java" afterPath="$PROJECT_DIR$/src/NineBoard.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/NineBoardAdversarialSearch.java" afterPath="$PROJECT_DIR$/src/NineBoardAdversarialSearch.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/State.java" afterPath="$PROJECT_DIR$/src/State.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/UltimateTTT.java" afterPath="$PROJECT_DIR$/src/UltimateTTT.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/UltimateTTTAdversarialSearch.java" afterPath="$PROJECT_DIR$/src/UltimateTTTAdversarialSearch.java" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -16,14 +26,14 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.62578124">
+    <splitter split-orientation="horizontal" split-proportion="0.5179688">
       <split-first>
         <leaf>
-          <file leaf-file-name="NineBoardAdversarialSearch.java" pinned="false" current-in-tab="false">
+          <file leaf-file-name="NineBoardAdversarialSearch.java" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/NineBoardAdversarialSearch.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="467">
-                  <caret line="183" column="5" lean-forward="true" selection-start-line="1" selection-start-column="4" selection-end-line="183" selection-end-column="5" />
+                <state relative-caret-position="300">
+                  <caret line="20" column="38" lean-forward="false" selection-start-line="20" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
                   <folding />
                 </state>
               </provider>
@@ -32,7 +42,7 @@
           <file leaf-file-name="NineBoardUserInput.java" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/NineBoardUserInput.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="196">
+                <state relative-caret-position="276">
                   <caret line="91" column="27" lean-forward="true" selection-start-line="91" selection-start-column="0" selection-end-line="92" selection-end-column="0" />
                   <folding />
                 </state>
@@ -42,18 +52,8 @@
           <file leaf-file-name="State.java" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/State.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="180">
-                  <caret line="12" column="0" lean-forward="true" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="AdversarialSearch.java" pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/src/AdversarialSearch.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="154">
-                  <caret line="56" column="0" lean-forward="false" selection-start-line="56" selection-start-column="0" selection-end-line="56" selection-end-column="0" />
+                <state relative-caret-position="105">
+                  <caret line="7" column="0" lean-forward="false" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
                   <folding />
                 </state>
               </provider>
@@ -62,7 +62,7 @@
           <file leaf-file-name="UserInput.java" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/UserInput.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="286">
+                <state relative-caret-position="168">
                   <caret line="58" column="0" lean-forward="true" selection-start-line="58" selection-start-column="0" selection-end-line="58" selection-end-column="0" />
                   <folding />
                 </state>
@@ -72,19 +72,19 @@
           <file leaf-file-name="UltimateTTT.java" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/UltimateTTT.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="630">
-                  <caret line="42" column="31" lean-forward="false" selection-start-line="42" selection-start-column="31" selection-end-line="42" selection-end-column="31" />
+                <state relative-caret-position="171">
+                  <caret line="42" column="31" lean-forward="true" selection-start-line="42" selection-start-column="31" selection-end-line="42" selection-end-column="31" />
                   <folding>
-                    <element signature="e#1447#1448#0" expanded="true" />
-                    <element signature="e#1474#1475#0" expanded="true" />
-                    <element signature="e#1505#1506#0" expanded="true" />
-                    <element signature="e#1559#1560#0" expanded="true" />
-                    <element signature="e#1589#1590#0" expanded="true" />
-                    <element signature="e#1618#1619#0" expanded="true" />
-                    <element signature="e#2797#2798#0" expanded="true" />
-                    <element signature="e#2831#2832#0" expanded="true" />
-                    <element signature="e#2874#2875#0" expanded="true" />
-                    <element signature="e#2926#2927#0" expanded="true" />
+                    <element signature="e#1465#1466#0" expanded="true" />
+                    <element signature="e#1492#1493#0" expanded="true" />
+                    <element signature="e#1523#1524#0" expanded="true" />
+                    <element signature="e#1577#1578#0" expanded="true" />
+                    <element signature="e#1607#1608#0" expanded="true" />
+                    <element signature="e#1636#1637#0" expanded="true" />
+                    <element signature="e#2815#2816#0" expanded="true" />
+                    <element signature="e#2849#2850#0" expanded="true" />
+                    <element signature="e#2892#2893#0" expanded="true" />
+                    <element signature="e#2944#2945#0" expanded="true" />
                   </folding>
                 </state>
               </provider>
@@ -93,7 +93,7 @@
           <file leaf-file-name="Board.java" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/Board.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="-293">
+                <state relative-caret-position="105">
                   <caret line="7" column="13" lean-forward="false" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
                   <folding>
                     <element signature="imports" expanded="true" />
@@ -105,8 +105,8 @@
           <file leaf-file-name="Main.java" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/Main.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="195">
-                  <caret line="13" column="0" lean-forward="true" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
+                <state relative-caret-position="60">
+                  <caret line="4" column="58" lean-forward="false" selection-start-line="4" selection-start-column="58" selection-end-line="4" selection-end-column="58" />
                   <folding />
                 </state>
               </provider>
@@ -128,8 +128,8 @@
           <file leaf-file-name="UltimateTTTAdversarialSearch.java" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/UltimateTTTAdversarialSearch.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="15">
-                  <caret line="1" column="4" lean-forward="false" selection-start-line="1" selection-start-column="4" selection-end-line="1" selection-end-column="4" />
+                <state relative-caret-position="-865">
+                  <caret line="79" column="31" lean-forward="true" selection-start-line="79" selection-start-column="0" selection-end-line="80" selection-end-column="0" />
                   <folding />
                 </state>
               </provider>
@@ -149,14 +149,25 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="NineBoard.java" pinned="false" current-in-tab="true">
+          <file leaf-file-name="NineBoard.java" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/NineBoard.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="256">
-                  <caret line="117" column="8" lean-forward="true" selection-start-line="117" selection-start-column="8" selection-end-line="118" selection-end-column="31" />
+                <state relative-caret-position="-202">
+                  <caret line="135" column="23" lean-forward="false" selection-start-line="135" selection-start-column="0" selection-end-line="136" selection-end-column="0" />
                   <folding>
-                    <element signature="e#3533#3539#0" expanded="true" />
+                    <element signature="imports" expanded="true" />
+                    <element signature="e#4148#4154#0" expanded="true" />
                   </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="AdversarialSearch.java" pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/src/AdversarialSearch.java">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="547">
+                  <caret line="72" column="0" lean-forward="false" selection-start-line="72" selection-start-column="0" selection-end-line="72" selection-end-column="0" />
+                  <folding />
                 </state>
               </provider>
             </entry>
@@ -195,17 +206,17 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/State.java" />
-        <option value="$PROJECT_DIR$/src/NineBoard.java" />
         <option value="$PROJECT_DIR$/src/NineBoardUserInput.java" />
-        <option value="$PROJECT_DIR$/src/NineBoardAdversarialSearch.java" />
         <option value="$PROJECT_DIR$/src/UltimateTTTUserInput.java" />
-        <option value="$PROJECT_DIR$/src/UltimateTTTAdversarialSearch.java" />
-        <option value="$PROJECT_DIR$/src/UltimateTTT.java" />
         <option value="$PROJECT_DIR$/src/Board.java" />
-        <option value="$PROJECT_DIR$/src/Main.java" />
         <option value="$PROJECT_DIR$/src/UserInput.java" />
+        <option value="$PROJECT_DIR$/src/State.java" />
+        <option value="$PROJECT_DIR$/src/UltimateTTT.java" />
+        <option value="$PROJECT_DIR$/src/NineBoard.java" />
+        <option value="$PROJECT_DIR$/src/UltimateTTTAdversarialSearch.java" />
+        <option value="$PROJECT_DIR$/src/Main.java" />
         <option value="$PROJECT_DIR$/src/AdversarialSearch.java" />
+        <option value="$PROJECT_DIR$/src/NineBoardAdversarialSearch.java" />
       </list>
     </option>
   </component>
@@ -397,10 +408,11 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="12761000" />
+    <option name="totallyTimeSpent" value="15180000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="22" width="1280" height="735" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
@@ -410,7 +422,7 @@
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.4826546" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22021116" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32880846" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -519,32 +531,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/UltimateTTTAdversarialSearch.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="1" column="4" lean-forward="false" selection-start-line="1" selection-start-column="4" selection-end-line="1" selection-end-column="4" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/NineBoardAdversarialSearch.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="467">
-          <caret line="183" column="5" lean-forward="true" selection-start-line="1" selection-start-column="4" selection-end-line="183" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/NineBoard.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="256">
-          <caret line="117" column="8" lean-forward="true" selection-start-line="117" selection-start-column="8" selection-end-line="118" selection-end-column="31" />
-          <folding>
-            <element signature="e#3533#3539#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_121.jdk/Contents/Home/src.zip!/java/lang/Object.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="177">
@@ -553,60 +539,25 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/NineBoardUserInput.java">
+    <entry file="file://$PROJECT_DIR$/src/State.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="196">
-          <caret line="91" column="27" lean-forward="true" selection-start-line="91" selection-start-column="0" selection-end-line="92" selection-end-column="0" />
+        <state relative-caret-position="105">
+          <caret line="7" column="0" lean-forward="false" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="13" column="0" lean-forward="true" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/UltimateTTT.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="630">
-          <caret line="42" column="31" lean-forward="false" selection-start-line="42" selection-start-column="31" selection-end-line="42" selection-end-column="31" />
-          <folding>
-            <element signature="e#1447#1448#0" expanded="true" />
-            <element signature="e#1474#1475#0" expanded="true" />
-            <element signature="e#1505#1506#0" expanded="true" />
-            <element signature="e#1559#1560#0" expanded="true" />
-            <element signature="e#1589#1590#0" expanded="true" />
-            <element signature="e#1618#1619#0" expanded="true" />
-            <element signature="e#2797#2798#0" expanded="true" />
-            <element signature="e#2831#2832#0" expanded="true" />
-            <element signature="e#2874#2875#0" expanded="true" />
-            <element signature="e#2926#2927#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/UserInput.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="286">
+        <state relative-caret-position="168">
           <caret line="58" column="0" lean-forward="true" selection-start-line="58" selection-start-column="0" selection-end-line="58" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/State.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="12" column="0" lean-forward="true" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Board.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-293">
+        <state relative-caret-position="105">
           <caret line="7" column="13" lean-forward="false" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -614,10 +565,72 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/UltimateTTTAdversarialSearch.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-865">
+          <caret line="79" column="31" lean-forward="true" selection-start-line="79" selection-start-column="0" selection-end-line="80" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="4" column="58" lean-forward="false" selection-start-line="4" selection-start-column="58" selection-end-line="4" selection-end-column="58" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/NineBoard.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-202">
+          <caret line="135" column="23" lean-forward="false" selection-start-line="135" selection-start-column="0" selection-end-line="136" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#4148#4154#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/UltimateTTT.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="171">
+          <caret line="42" column="31" lean-forward="true" selection-start-line="42" selection-start-column="31" selection-end-line="42" selection-end-column="31" />
+          <folding>
+            <element signature="e#1465#1466#0" expanded="true" />
+            <element signature="e#1492#1493#0" expanded="true" />
+            <element signature="e#1523#1524#0" expanded="true" />
+            <element signature="e#1577#1578#0" expanded="true" />
+            <element signature="e#1607#1608#0" expanded="true" />
+            <element signature="e#1636#1637#0" expanded="true" />
+            <element signature="e#2815#2816#0" expanded="true" />
+            <element signature="e#2849#2850#0" expanded="true" />
+            <element signature="e#2892#2893#0" expanded="true" />
+            <element signature="e#2944#2945#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/AdversarialSearch.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="154">
-          <caret line="56" column="0" lean-forward="false" selection-start-line="56" selection-start-column="0" selection-end-line="56" selection-end-column="0" />
+        <state relative-caret-position="547">
+          <caret line="72" column="0" lean-forward="false" selection-start-line="72" selection-start-column="0" selection-end-line="72" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/NineBoardUserInput.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="276">
+          <caret line="91" column="27" lean-forward="true" selection-start-line="91" selection-start-column="0" selection-end-line="92" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/NineBoardAdversarialSearch.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="20" column="38" lean-forward="false" selection-start-line="20" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
           <folding />
         </state>
       </provider>

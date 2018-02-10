@@ -20,7 +20,7 @@ public class UltimateTTTAdversarialSearch {
             System.out.println(count);
             ultimateTTT.move(test.getBoard(), test.getPosition(), bot);
             int score = minimaxWithAlphaBeta(ultimateTTT, -Integer.MAX_VALUE, Integer.MAX_VALUE, false, 0);
-            ultimateTTT.undoMove(test.getBoard(), test.getPosition());
+//            ultimateTTT.undoMove(test.getBoard(), test.getPosition());
             if (score > maxScore) {
                 move = test;
                 maxScore = score;
@@ -53,7 +53,7 @@ public class UltimateTTTAdversarialSearch {
             ultimateTTT.move(test.getBoard(), test.getPosition(), bot);
             int score = minimaxWithAlphaBeta(ultimateTTT, alpha, beta, false, depth++);
 
-            ultimateTTT.undoMove(test.getBoard(), test.getPosition());
+//            ultimateTTT.undoMove(test.getBoard(), test.getPosition());
 
             if (score > alpha){
                 alpha = score;
@@ -77,7 +77,7 @@ public class UltimateTTTAdversarialSearch {
 
             int score = minimaxWithAlphaBeta(ultimateTTT, alpha, beta, true, depth++);
 
-            ultimateTTT.undoMove(test.getBoard(), test.getPosition());
+//            ultimateTTT.undoMove(test.getBoard(), test.getPosition());
 
             if (score < beta){
                 beta = score;

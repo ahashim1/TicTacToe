@@ -12,9 +12,10 @@ public class AdversarialSearch {
         Move move = null;
         long start = System.currentTimeMillis();
         for (Move test: board.getPossibleMoves()){
-            board.move( test.getBoard(), test.getPosition(), bot);
-            int score = minimaxWithAlphaBeta(board, -Integer.MAX_VALUE, Integer.MAX_VALUE, false);
-            board.undoMove(test.getBoard(), test.getPosition());
+            Board copy = board.deepClone();
+            copy.move( test.getBoard(), test.getPosition(), bot);
+            int score = minimaxWithAlphaBeta(copy, -Integer.MAX_VALUE, Integer.MAX_VALUE, false);
+//            board.undoMove(test.getBoard(), test.getPosition());
             if (score > maxScore){
                 move = test;
                 maxScore = score;
@@ -42,7 +43,6 @@ public class AdversarialSearch {
     }
 
     private int getMaxWithAlphaBeta(Board board, int alpha, int beta){
-        Move bestMove = null;
         for (Move i: board.getPossibleMoves()){
             Board copy = board.deepClone();
             copy.move(i.getBoard(), i.getPosition(), bot);
@@ -50,7 +50,6 @@ public class AdversarialSearch {
 //            board.undoMove(i.getBoard(), i.getPosition());
 
             if (score >= alpha){
-                bestMove = i;
                 alpha = score;
             }
             if (alpha >= beta){
@@ -62,7 +61,6 @@ public class AdversarialSearch {
     }
 
     public int getMinWithAlphaBeta(Board board, int alpha, int beta){
-        Move bestMove = null;
 
         for (Move i: board.getPossibleMoves()){
 
@@ -72,7 +70,6 @@ public class AdversarialSearch {
 //            board.undoMove(i.getBoard(), i.getPosition());
 
             if (score <= beta){
-                bestMove = i;
                 beta = score;
             }
 

@@ -15,9 +15,10 @@ public class NineBoardAdversarialSearch {
         Move move = null;
 
         for (Move test: nineBoard.getPossibleMoves()) {
-            nineBoard.move(test.getBoard(), test.getPosition(), bot);
-            int score = minimaxWithAlphaBeta(nineBoard, -Integer.MAX_VALUE, Integer.MAX_VALUE, false, 0);
-            nineBoard.undoMove(test.getBoard(), test.getPosition());
+            NineBoard copy = nineBoard.deepClone();
+            copy.move(test.getBoard(), test.getPosition(), bot);
+            int score = minimaxWithAlphaBeta(copy, -Integer.MAX_VALUE, Integer.MAX_VALUE, false, 0);
+//            nineBoard.undoMove(test.getBoard(), test.getPosition());
             if (score > maxScore) {
                 move = test;
                 maxScore = score;
@@ -30,7 +31,7 @@ public class NineBoardAdversarialSearch {
 
     private int minimaxWithAlphaBeta(NineBoard nineBoard, int alpha, int beta, boolean isMax, int depth){
 
-        if (nineBoard.isGameOver() || depth > maxDepth){
+        if (nineBoard.isGameOver() || depth++ == maxDepth){
             return score(nineBoard);
 
 
@@ -44,11 +45,12 @@ public class NineBoardAdversarialSearch {
 
     private int getMaxWithAlphaBeta(NineBoard nineBoard, int alpha, int beta, int depth){
         for (Move test: nineBoard.getPossibleMoves()) {
+            NineBoard copy = nineBoard.deepClone();
 
-            nineBoard.move(test.getBoard(), test.getPosition(), bot);
-            int score = minimaxWithAlphaBeta(nineBoard, alpha, beta, false, depth++);
+            copy.move(test.getBoard(), test.getPosition(), bot);
+            int score = minimaxWithAlphaBeta(copy, alpha, beta, false, depth);
 
-            nineBoard.undoMove(test.getBoard(), test.getPosition());
+//            nineBoard.undoMove(test.getBoard(), test.getPosition());
 
             if (score > alpha){
                 alpha = score;
@@ -65,12 +67,13 @@ public class NineBoardAdversarialSearch {
 
     private int getMinWithAlphaBeta(NineBoard nineBoard, int alpha, int beta, int depth){
         for (Move test: nineBoard.getPossibleMoves()) {
+            NineBoard copy = nineBoard.deepClone();
 
-            nineBoard.move(test.getBoard(), test.getPosition(), user);
+            copy.move(test.getBoard(), test.getPosition(), user);
 
-            int score = minimaxWithAlphaBeta(nineBoard, alpha, beta, true, depth++);
+            int score = minimaxWithAlphaBeta(copy, alpha, beta, true, depth);
 
-            nineBoard.undoMove(test.getBoard(), test.getPosition());
+//            nineBoard.undoMove(test.getBoard(), test.getPosition());
 
             if (score < beta){
                 beta = score;

@@ -1,6 +1,7 @@
+import java.io.*;
 import java.util.ArrayList;
 
-public class NineBoard implements State{
+public class NineBoard implements State, Serializable{
 
     private int numBoards = 9;
     private Board[][] nineBoard = new Board[numBoards/3][numBoards/3];
@@ -9,8 +10,25 @@ public class NineBoard implements State{
     private int previousBoard = -1;
     private Mark winner = Mark.BLANK;
 
+
     public NineBoard(){
         initializeBoard();
+    }
+
+    public NineBoard deepClone() {
+        try {
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            ObjectOutputStream oos = new ObjectOutputStream(baos);
+            oos.writeObject(this);
+
+            ByteArrayInputStream bais = new ByteArrayInputStream(baos.toByteArray());
+            ObjectInputStream ois = new ObjectInputStream(bais);
+            return (NineBoard) ois.readObject();
+        } catch (IOException e) {
+            return null;
+        } catch (ClassNotFoundException e) {
+            return null;
+        }
     }
 
     public int getActiveBoard(){
@@ -100,13 +118,13 @@ public class NineBoard implements State{
         return false;
     }
 
-    public void undoMove(int activeBoard, int position){
-        Board board = getBoardWith(activeBoard);
-        board.undoMove(activeBoard, position);
-        changeTurn();
-        this.activeBoard = previousBoard;
-        previousBoard = -1;
-    }
+//    public void undoMove(int activeBoard, int position){
+//        Board board = getBoardWith(activeBoard);
+//        board.undoMove(activeBoard, position);
+//        changeTurn();
+//        this.activeBoard = previousBoard;
+//        previousBoard = -1;
+//    }
 
 
     public boolean move(int board, int position, Mark user){
