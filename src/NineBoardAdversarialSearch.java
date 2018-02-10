@@ -19,9 +19,9 @@ public class NineBoardAdversarialSearch {
             for (int i = 1; i<=9; i++){
                 if (nineBoard.isBoardAvailable(i)){
                     Board board = nineBoard.getBoardWith(i);
-                    for (int j = 1; j<=9; j++){
-                        if (!board.isTileTaken(j)){
-                            nineBoard.move(i, j, bot);
+                    for (int j: board.getPossibleMoves()){
+
+                        nineBoard.move(i, j, bot);
                             int score = minimaxWithAlphaBeta(nineBoard, -Integer.MAX_VALUE, Integer.MAX_VALUE, false, 0);
                             nineBoard.undoMove(i, j);
                             if (score > maxScore){
@@ -31,22 +31,21 @@ public class NineBoardAdversarialSearch {
                             }
 
                         }
-                    }
+
                 }
             }
         }else{
             Board board = nineBoard.getBoardWith(activeBoard);
-            for (int i = 1; i<=9; i++){
-                if (!board.isTileTaken(i)){
-                    nineBoard.move(activeBoard, i, bot);
-                    int score = minimaxWithAlphaBeta(nineBoard, -Integer.MAX_VALUE, Integer.MAX_VALUE, false, 0);
-                    nineBoard.undoMove(activeBoard, i);
-                    if (score > maxScore){
-                        move = i;
-                        maxScore = score;
-                    }
-
+            for (int i: board.getPossibleMoves()){
+                nineBoard.move(activeBoard, i, bot);
+                int score = minimaxWithAlphaBeta(nineBoard, -Integer.MAX_VALUE, Integer.MAX_VALUE, false, 0);
+                nineBoard.undoMove(activeBoard, i);
+                if (score > maxScore){
+                    move = i;
+                    maxScore = score;
                 }
+
+
             }
         }
 
@@ -72,9 +71,9 @@ public class NineBoardAdversarialSearch {
         int activeBoard = nineBoard.getActiveBoard();
         Board board = nineBoard.getBoardWith(activeBoard);
 
-        for (int i = 1; i<=9; i++){
-            if (!board.isTileTaken((i))){
-                nineBoard.move(activeBoard, i, bot);
+        for (int i: board.getPossibleMoves()){
+
+            nineBoard.move(activeBoard, i, bot);
                 int score = minimaxWithAlphaBeta(nineBoard, alpha, beta, false, depth++);
 
                 nineBoard.undoMove(activeBoard, i);
@@ -86,7 +85,7 @@ public class NineBoardAdversarialSearch {
                 if (alpha >= beta){
                     return alpha;
                 }
-            }
+
         }
 
         return alpha;
@@ -96,9 +95,9 @@ public class NineBoardAdversarialSearch {
         int activeBoard = nineBoard.getActiveBoard();
         Board board = nineBoard.getBoardWith(activeBoard);
 
-        for (int i = 1; i<=9; i++){
-            if (!board.isTileTaken(i)){
-                nineBoard.move(activeBoard, i, user);
+        for (int i: board.getPossibleMoves()){
+
+            nineBoard.move(activeBoard, i, user);
 
                 int score = minimaxWithAlphaBeta(nineBoard, alpha, beta, true, depth++);
 
@@ -112,7 +111,7 @@ public class NineBoardAdversarialSearch {
                     return beta;
                 }
             }
-        }
+
 
         return beta;
     }

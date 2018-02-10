@@ -1,18 +1,18 @@
+import java.util.ArrayList;
 public class Board {
     private int boardSize = 3;
     private State[][] board = new State[boardSize][boardSize];
     private State turn = State.X;
-    private int moveCount;
     private boolean isGameOver = false;
     public State winner = State.BLANK;
- public Board(){
+
+    public Board(){
         initializeBoard();
-        moveCount = 0;
     }
 
 
 
-      public State getTurn(){
+    public State getTurn(){
         return turn;
     }
 
@@ -50,7 +50,16 @@ public class Board {
 
     }
 
-    public boolean isTileTaken(int input){
+    public ArrayList<Integer> getPossibleMoves(){
+        ArrayList<Integer> arr = new ArrayList<>();
+        for (int i = 1; i<=9; i++){
+            if (!isTileTaken(i)){
+                arr.add(i);
+            }
+        }
+        return arr;
+    }
+    private boolean isTileTaken(int input){
         State tile = getTileValueWith(input);
         if (tile == State.BLANK){
             return false;
@@ -80,7 +89,6 @@ public class Board {
         int col = (input - 1) % boardSize;
         board[row][col] = player;
 
-        moveCount++;
         if (checkColumn(col, player) || checkRow(row, player) || checkDiag(row, col, player) || checkAntiDiag(row, col, player)){
             isGameOver = true;
             winner = player;
@@ -106,7 +114,6 @@ public class Board {
         winner = State.BLANK;
         isGameOver = false;
         changeTurn();
-        moveCount--;
         board[row][col] = State.BLANK;
     }
 

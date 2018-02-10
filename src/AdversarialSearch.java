@@ -11,16 +11,16 @@ public class AdversarialSearch {
         int maxScore = -Integer.MAX_VALUE;
         int move = -1;
 //        long start = System.currentTimeMillis();
-        for (int i = 1; i<=9; i++){
-            if (!board.isTileTaken(i)){
-                board.move(i, bot);
-                int score = minimaxWithAlphaBeta(board, -Integer.MAX_VALUE, Integer.MAX_VALUE, false);
-                board.undoMove(i);
-                if (score > maxScore){
-                    move = i;
-                    maxScore = score;
-                }
+        for (int i: board.getPossibleMoves()){
+
+            board.move(i, bot);
+            int score = minimaxWithAlphaBeta(board, -Integer.MAX_VALUE, Integer.MAX_VALUE, false);
+            board.undoMove(i);
+            if (score > maxScore){
+                move = i;
+                maxScore = score;
             }
+
 
         }
 //        long elapsed = System.currentTimeMillis() - start;
@@ -44,15 +44,12 @@ public class AdversarialSearch {
 
     private int getMaxWithAlphaBeta(Board board, int alpha, int beta){
 
-        for (int i = 1; i<=9; i++){
+        for (int i: board.getPossibleMoves()){
 
-            if (!board.isTileTaken(i)){
 
-                board.move(i, bot);
+            board.move(i, bot);
                 int score = minimaxWithAlphaBeta(board, alpha, beta, false);
                 board.undoMove(i);
-
-
 
                 if (score > alpha){
                     alpha = score;
@@ -63,18 +60,15 @@ public class AdversarialSearch {
                     return alpha;
                 }
 
-
-
-            }
         }
         return alpha;
     }
 
     public int getMinWithAlphaBeta(Board board, int alpha, int beta){
-        for (int i = 1; i<=9; i++){
-            if (!board.isTileTaken(i)){
+        for (int i: board.getPossibleMoves()){
 
-                board.move(i, user);
+
+            board.move(i, user);
                 int score = minimaxWithAlphaBeta(board, alpha, beta, true);
                 board.undoMove(i);
 
@@ -88,7 +82,7 @@ public class AdversarialSearch {
                 }
 
 
-            }
+
         }
 
         return beta;
@@ -124,11 +118,10 @@ public class AdversarialSearch {
     public  int getMax(Board board){
         int maxScore = -1000;
 
-        for (int i = 1; i<=9; i++){
+        for (int i: board.getPossibleMoves()){
 
-            if (!board.isTileTaken(i)){
 
-                board.move(i, bot);
+            board.move(i, bot);
                 int score = minimax(board, false);
 
 
@@ -140,16 +133,16 @@ public class AdversarialSearch {
 
 
             }
-        }
+
         return maxScore;
     }
 
     public  int getMin(Board board){
         int minScore = 1000;
-        for (int i = 1; i<=9; i++){
-            if (!board.isTileTaken(i)){
+        for (int i: board.getPossibleMoves()){
 
-                board.move(i, user);
+
+            board.move(i, user);
                 int score = minimax(board, true);
 
                 if (score < minScore){
@@ -157,7 +150,7 @@ public class AdversarialSearch {
                 }
                 board.undoMove(i);
 
-            }
+
         }
 
         return minScore;

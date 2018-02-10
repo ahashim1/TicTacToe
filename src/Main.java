@@ -2,7 +2,7 @@ public class Main {
 
     public static void main(String[] args) {
 
-        UltimateTTTUserInput game = new UltimateTTTUserInput();
+        NineBoardUserInput game = new NineBoardUserInput();
         game.start();
 
     }
