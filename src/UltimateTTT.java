@@ -119,17 +119,29 @@ public class UltimateTTT implements State, Serializable {
         return nineBoard.getBoardWith(input);
     }
 
+    public Board getGlobalBoard(){
+        return globalBoard;
+    }
 
     // If global board spot is taken or if there is the ability to play 3 in a row increase number of free plays after state.
-//    public int numberFreePlays(int position){
-//        int freePlays = 0;
-//        if (globalBoard.isTileTaken(position)){
-//            freePlays += 1;
-//        }
-//
-//        return freePlays;
-//    }
+    public int numberFreePlays(int boardInput){
+        int freePlays = 0;
 
+        for (int i = 1; i<=9; i++){
+            if (!nineBoard.getBoardWith(boardInput).isTileTaken(i)){
+                 if (globalBoard.isTileTaken(i)){
+                     freePlays++;
+                 }
+            }
+        }
+
+
+        return freePlays;
+    }
+
+    public boolean isBoardAvailable(int input){
+        return nineBoard.isBoardAvailable(input);
+    }
 
 
 

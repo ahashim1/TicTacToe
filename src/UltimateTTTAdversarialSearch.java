@@ -112,87 +112,125 @@ public class UltimateTTTAdversarialSearch {
 
         int sum = 0;
 
-//        for (int boardInput = 1; boardInput<=9; boardInput++){
-//
-//
-//
-//            Board board = ultimateTTT.getBoardWith(boardInput);
-//            for (int row = 0; row<3; row++){
-//                int botRowCount = 0;
-//                int botColCount = 0;
-//                int userRowCount = 0;
-//                int userColCount = 0;
-//                int botDiagCount = 0;
-//                int userDiagCount = 0;
-//                int botAntiDiagCount = 0;
-//                int userAntiDiagCount = 0;
-//
-//
-//                for (int col = 0; col<3; col++){
-//
-//
-//                    if (board.getTileValueWith(row, col) == bot){
-//                        botRowCount++;
-//                    }else if (board.getTileValueWith(row, col) == user){
-//                        userRowCount++;
-//                    }
-//
-//                    if (board.getTileValueWith(col, row) == bot){
-//                        botColCount++;
-//                    }else if (board.getTileValueWith(col, row) == user){
-//                        botRowCount++;
-//                    }
-//
-//
-//
-//
-//                }
-//
-//                // Diaganol
-//
-//                if (board.getTileValueWith(row, row) == bot){
-//                    botDiagCount++;
-//                }else if (board.getTileValueWith(row, row) == user){
-//                    userDiagCount++;
-//                }
-//
-//                if (board.getTileValueWith(row, 2-row) == bot){
-//                    botAntiDiagCount++;
-//                }else if (board.getTileValueWith(row, 2- row) == user){
-//                    userAntiDiagCount++;
-//                }
-//
-//
-//
-//                if (row == 2){
-//                    if (botDiagCount>0 && userDiagCount==0){
-//                        sum += 2 ^ botDiagCount;
-//                    }else if (botDiagCount==0 && userDiagCount > 0){
-//                        sum -= 2 ^ userDiagCount;
-//                    }
-//
-//                    if (botAntiDiagCount>0 && userAntiDiagCount==0){
-//                        sum += 2 ^ botAntiDiagCount;
-//                    }else if (botAntiDiagCount==0 && userAntiDiagCount > 0){
-//                        sum -= 2 ^ userAntiDiagCount;
-//                    }
-//                }
-//
-//
-//                if (botRowCount>0 && userRowCount==0){
-//                    sum += 2 ^ botRowCount;
-//                }else if (botRowCount==0 && userRowCount > 0){
-//                    sum -= 2 ^ userRowCount;
-//                }
-//
-//                if (botColCount>0 && userColCount==0){
-//                    sum += 2 ^ botColCount;
-//                }else if (botColCount==0 && userColCount > 0){
-//                    sum -= 2 ^ userColCount;
-//                }
-//            }
-//        }
+        sum += 10 * evaluateSingleBoard(ultimateTTT.getGlobalBoard());
 
+        for (int boardInput = 1; boardInput<=9; boardInput++) {
+            if (ultimateTTT.isBoardAvailable(boardInput)) {
+
+                Board board = ultimateTTT.getBoardWith(boardInput);
+                sum += evaluateSingleBoard(board);
+
+                int numberFreePlays = ultimateTTT.numberFreePlays(boardInput);
+                if (ultimateTTT.getTurn() == user){
+                    sum += 10 * numberFreePlays;
+                }else{
+                    sum -= 10 * numberFreePlays;
+                }
+            }
+        }
         return sum;
+
+    }
+
+    private int evaluateSingleBoard(Board board){
+        int score = 0;
+        score += evaluateRows(board);
+        score += evaluateCols(board);
+        score += evaluateDiags(board);
+
+        return score;
+    }
+
+    private int evaluateRows(Board board){
+        int score = 0;
+
+        for (int row = 0; row < 3; row++){
+            int botCount = 0;
+            int userCount = 0;
+
+            for (int col = 0; col < 3; col++){
+                if (board.getTileValueWith(row, col) == bot){
+                    botCount++;
+                }else if (board.getTileValueWith(row, col) == user){
+                    userCount++;
+                }
+
+
+            }
+
+            if (botCount > 0 && userCount == 0) {
+                score += 2 ^ botCount;
+            } else if (botCount == 0 && userCount > 0) {
+                score += 2 ^ userCount;
+            }
+        }
+        return score;
+    }
+
+    private int evaluateCols(Board board){
+        int score = 0;
+        int botCount = 0;
+        int userCount = 0;
+        for (int col = 0; col < 3; col++){
+
+            for (int row = 0; row < 3; row++){
+                if (board.getTileValueWith(row, col) == bot){
+                    botCount++;
+                }else if (board.getTileValueWith(row, col) == user){
+                    userCount++;
+                }
+            }
+        }
+
+        if (botCount > 0 && userCount == 0){
+            score += 2 ^ botCount;
+        }else if (botCount == 0 && userCount > 0){
+            score += 2 ^ userCount;
+        }
+
+        return score;
+    }
+
+    private int evaluateDiags(Board board){
+        int score = 0;
+
+        int botDiagCount = 0;
+        int userDiagCount = 0;
+        int botAntiDiagCount = 0;
+        int userAntiDiagCount = 0;
+        for (int row = 0; row < 3; row++){
+
+            if (board.getTileValueWith(row, row) == bot){
+                botDiagCount++;
+            }else if (board.getTileValueWith(row, row) == user){
+                userDiagCount++;
+            }
+
+            if (board.getTileValueWith(row, 2-row) == bot){
+                botAntiDiagCount++;
+            }else if (board.getTileValueWith(row, 2- row) == user){
+                userAntiDiagCount++;
+            }
+
+
+
+            if (row == 2){
+                if (botDiagCount>0 && userDiagCount==0){
+                    score += 2 ^ botDiagCount;
+                }else if (botDiagCount==0 && userDiagCount > 0){
+                    score -= 2 ^ userDiagCount;
+                }
+
+                if (botAntiDiagCount>0 && userAntiDiagCount==0){
+                    score += 2 ^ botAntiDiagCount;
+                }else if (botAntiDiagCount==0 && userAntiDiagCount > 0){
+                    score -= 2 ^ userAntiDiagCount;
+                }
+            }
+        }
+
+
+
+        return score;
     }
 }

@@ -18,7 +18,6 @@ public class NineBoardAdversarialSearch {
             NineBoard copy = nineBoard.deepClone();
             copy.move(test.getBoard(), test.getPosition(), bot);
             int score = minimaxWithAlphaBeta(copy, -Integer.MAX_VALUE, Integer.MAX_VALUE, false, 0);
-//            nineBoard.undoMove(test.getBoard(), test.getPosition());
             if (score > maxScore) {
                 move = test;
                 maxScore = score;
@@ -50,7 +49,6 @@ public class NineBoardAdversarialSearch {
             copy.move(test.getBoard(), test.getPosition(), bot);
             int score = minimaxWithAlphaBeta(copy, alpha, beta, false, depth);
 
-//            nineBoard.undoMove(test.getBoard(), test.getPosition());
 
             if (score > alpha){
                 alpha = score;
@@ -73,7 +71,6 @@ public class NineBoardAdversarialSearch {
 
             int score = minimaxWithAlphaBeta(copy, alpha, beta, true, depth);
 
-//            nineBoard.undoMove(test.getBoard(), test.getPosition());
 
             if (score < beta){
                 beta = score;
