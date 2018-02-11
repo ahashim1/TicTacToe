@@ -7,7 +7,6 @@ public class NineBoard implements State, Serializable{
     private Board[][] nineBoard = new Board[numBoards/3][numBoards/3];
     private Mark turn = Mark.X;
     private int activeBoard = -1;
-    private int previousBoard = -1;
     private Mark winner = Mark.BLANK;
 
 
@@ -118,22 +117,12 @@ public class NineBoard implements State, Serializable{
         return false;
     }
 
-//    public void undoMove(int activeBoard, int position){
-//        Board board = getBoardWith(activeBoard);
-//        board.undoMove(activeBoard, position);
-//        changeTurn();
-//        this.activeBoard = previousBoard;
-//        previousBoard = -1;
-//    }
-
-
     public boolean move(int board, int position, Mark user){
         int boardRow = (board - 1)/3;
         int boardCol = (board - 1)%3;
         if (!nineBoard[boardRow][boardCol].move(activeBoard, position, user)){
             return false;
         }
-        previousBoard = activeBoard;
         activeBoard = position;
         changeTurn();
         return true;

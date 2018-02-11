@@ -8,7 +8,6 @@ public class UltimateTTT implements State, Serializable {
     private Mark turn = Mark.X;
     private Mark winner = Mark.BLANK;
     private int activeBoard = -1;
-    private int previousBoard = -1;
 
     public UltimateTTT(){
         this.nineBoard = new NineBoard();
@@ -57,7 +56,6 @@ public class UltimateTTT implements State, Serializable {
 
 
         changeTurn();
-        previousBoard = activeBoard;
         activeBoard = position;
         if (globalBoard.isTileTaken(activeBoard)) {
             activeBoard = -1;
@@ -65,16 +63,6 @@ public class UltimateTTT implements State, Serializable {
         return true;
 
     }
-
-//    public void undoMove(int board, int position){
-//        nineBoard.undoMove(board, position);
-//        globalBoard.undoMove(board, position);
-//        updateGlobalBoard();
-//        changeTurn();
-//        this.activeBoard = previousBoard;
-//        previousBoard = -1;
-//
-//    }
 
     public Mark getTurn(){
         return turn;
@@ -131,13 +119,17 @@ public class UltimateTTT implements State, Serializable {
         return nineBoard.getBoardWith(input);
     }
 
-    private void updateGlobalBoard(){
-        for (int i = 1; i<=9; i++){
-            if (nineBoard.getBoardWith(i).isGameOver()){
-                globalBoard.move(0, i, nineBoard.getBoardWith(i).getWinner());
-            }
-        }
-    }
+
+    // If global board spot is taken or if there is the ability to play 3 in a row increase number of free plays after state.
+//    public int numberFreePlays(int position){
+//        int freePlays = 0;
+//        if (globalBoard.isTileTaken(position)){
+//            freePlays += 1;
+//        }
+//
+//        return freePlays;
+//    }
+
 
 
 
