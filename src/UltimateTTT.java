@@ -1,6 +1,7 @@
+import java.io.*;
 import java.util.ArrayList;
 
-public class UltimateTTT implements State {
+public class UltimateTTT implements State, Serializable {
 
     private NineBoard nineBoard;
     private Board globalBoard;
@@ -14,6 +15,22 @@ public class UltimateTTT implements State {
         this.globalBoard = new Board();
     }
 
+    public UltimateTTT deepClone(){
+        try {
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            ObjectOutputStream oos = new ObjectOutputStream(baos);
+            oos.writeObject(this);
+
+            ByteArrayInputStream bais = new ByteArrayInputStream(baos.toByteArray());
+            ObjectInputStream ois = new ObjectInputStream(bais);
+            return (UltimateTTT) ois.readObject();
+        } catch (IOException e) {
+            return null;
+        } catch (ClassNotFoundException e) {
+            return null;
+        }
+    }
+
     public boolean isGameOver(){
         if (globalBoard.isGameOver()){
             winner = globalBoard.getWinner();
@@ -25,6 +42,7 @@ public class UltimateTTT implements State {
 
     public boolean move(int board, int position, Mark user){
         if (globalBoard.isTileTaken(board)){
+            activeBoard = -1;
             return false;
         }
         if (!nineBoard.move(board, position, user)){
@@ -41,6 +59,9 @@ public class UltimateTTT implements State {
         changeTurn();
         previousBoard = activeBoard;
         activeBoard = position;
+        if (globalBoard.isTileTaken(activeBoard)) {
+            activeBoard = -1;
+        }
         return true;
 
     }

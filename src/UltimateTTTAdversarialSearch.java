@@ -2,7 +2,7 @@ public class UltimateTTTAdversarialSearch {
     Mark user;
     Mark bot;
     UltimateTTT ultimateTTT;
-    private int maxDepth = 5;
+    private int maxDepth = 3;
 
     public UltimateTTTAdversarialSearch(Mark user, Mark bot, UltimateTTT ultimateTTT){
         this.user = user;
@@ -15,17 +15,15 @@ public class UltimateTTTAdversarialSearch {
         Move move = null;
 
         System.out.println(ultimateTTT.getPossibleMoves().size());
-        int count = 0;
         for (Move test: ultimateTTT.getPossibleMoves()) {
-            System.out.println(count);
-            ultimateTTT.move(test.getBoard(), test.getPosition(), bot);
-            int score = minimaxWithAlphaBeta(ultimateTTT, -Integer.MAX_VALUE, Integer.MAX_VALUE, false, 0);
+            UltimateTTT copy = ultimateTTT.deepClone();
+            copy.move(test.getBoard(), test.getPosition(), bot);
+            int score = minimaxWithAlphaBeta(copy, -Integer.MAX_VALUE, Integer.MAX_VALUE, false, 0);
 //            ultimateTTT.undoMove(test.getBoard(), test.getPosition());
             if (score > maxScore) {
                 move = test;
                 maxScore = score;
             }
-            count++;
         }
 
 
@@ -34,7 +32,7 @@ public class UltimateTTTAdversarialSearch {
 
     private int minimaxWithAlphaBeta(UltimateTTT ultimateTTT, int alpha, int beta, boolean isMax, int depth){
 
-        if (ultimateTTT.isGameOver() || depth > maxDepth){
+        if (ultimateTTT.isGameOver() || depth++ == maxDepth){
             return score(ultimateTTT);
 
 
@@ -47,11 +45,11 @@ public class UltimateTTTAdversarialSearch {
     }
 
     private int getMaxWithAlphaBeta(UltimateTTT ultimateTTT, int alpha, int beta, int depth){
-        System.out.println(ultimateTTT.getPossibleMoves().size());
         for (Move test: ultimateTTT.getPossibleMoves()) {
 
-            ultimateTTT.move(test.getBoard(), test.getPosition(), bot);
-            int score = minimaxWithAlphaBeta(ultimateTTT, alpha, beta, false, depth++);
+            UltimateTTT copy = ultimateTTT.deepClone();
+            copy.move(test.getBoard(), test.getPosition(), bot);
+            int score = minimaxWithAlphaBeta(ultimateTTT, alpha, beta, false, depth);
 
 //            ultimateTTT.undoMove(test.getBoard(), test.getPosition());
 
@@ -69,13 +67,13 @@ public class UltimateTTTAdversarialSearch {
     }
 
     private int getMinWithAlphaBeta(UltimateTTT ultimateTTT, int alpha, int beta, int depth){
-        System.out.println(ultimateTTT.getPossibleMoves().size());
 
         for (Move test: ultimateTTT.getPossibleMoves()) {
 
-            ultimateTTT.move(test.getBoard(), test.getPosition(), user);
+            UltimateTTT copy = ultimateTTT.deepClone();
+            copy.move(test.getBoard(), test.getPosition(), user);
 
-            int score = minimaxWithAlphaBeta(ultimateTTT, alpha, beta, true, depth++);
+            int score = minimaxWithAlphaBeta(ultimateTTT, alpha, beta, true, depth);
 
 //            ultimateTTT.undoMove(test.getBoard(), test.getPosition());
 

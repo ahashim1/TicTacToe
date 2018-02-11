@@ -48,6 +48,7 @@ public class UltimateTTTUserInput {
     }
     public void getPlayerMove(){
         int boardNumber = ultimateTTT.getActiveBoard();
+
         int positionNumber;
         if (boardNumber == -1){
             System.err.println("Please enter the board and tile you wish to place your move via 1-9");
