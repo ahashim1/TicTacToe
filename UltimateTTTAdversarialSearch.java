@@ -2,7 +2,7 @@ public class UltimateTTTAdversarialSearch {
     Mark user;
     Mark bot;
     UltimateTTT ultimateTTT;
-    private int maxDepth = 4;
+    private int maxDepth = 5;
 
     public UltimateTTTAdversarialSearch(Mark user, Mark bot, UltimateTTT ultimateTTT){
         this.user = user;
@@ -19,7 +19,6 @@ public class UltimateTTTAdversarialSearch {
             UltimateTTT copy = ultimateTTT.deepClone();
             copy.move(test.getBoard(), test.getPosition(), bot);
             int score = minimaxWithAlphaBeta(copy, -Integer.MAX_VALUE, Integer.MAX_VALUE, false, 0);
-//            ultimateTTT.undoMove(test.getBoard(), test.getPosition());
             if (score > maxScore) {
                 move = test;
                 maxScore = score;
@@ -51,7 +50,6 @@ public class UltimateTTTAdversarialSearch {
             copy.move(test.getBoard(), test.getPosition(), bot);
             int score = minimaxWithAlphaBeta(ultimateTTT, alpha, beta, false, depth);
 
-//            ultimateTTT.undoMove(test.getBoard(), test.getPosition());
 
             if (score > alpha){
                 alpha = score;
@@ -75,7 +73,6 @@ public class UltimateTTTAdversarialSearch {
 
             int score = minimaxWithAlphaBeta(ultimateTTT, alpha, beta, true, depth);
 
-//            ultimateTTT.undoMove(test.getBoard(), test.getPosition());
 
             if (score < beta){
                 beta = score;
@@ -112,7 +109,7 @@ public class UltimateTTTAdversarialSearch {
 
         int sum = 0;
 
-        sum += 10 * evaluateSingleBoard(ultimateTTT.getGlobalBoard());
+        sum += 100 * evaluateSingleBoard(ultimateTTT.getGlobalBoard());
 
         for (int boardInput = 1; boardInput<=9; boardInput++) {
             if (ultimateTTT.isBoardAvailable(boardInput)) {
@@ -122,9 +119,9 @@ public class UltimateTTTAdversarialSearch {
 
                 int numberFreePlays = ultimateTTT.numberFreePlays(boardInput);
                 if (ultimateTTT.getTurn() == user){
-                    sum += 10 * numberFreePlays;
+                    sum += 5 * numberFreePlays;
                 }else{
-                    sum -= 10 * numberFreePlays;
+                    sum -= 5 * numberFreePlays;
                 }
             }
         }

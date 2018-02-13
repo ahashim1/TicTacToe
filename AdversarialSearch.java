@@ -1,12 +1,26 @@
+// Author: Ali Hashim
+// This class contains the regular minimax and minimaxWithAlphaBeta implementations for the basic TTT board.
 public class AdversarialSearch {
+
+    // Constructor for adversarial search keeps track of the user, bot, and board
     Mark user;
     Mark bot;
     Board board;
+
     public AdversarialSearch(Mark user, Mark bot, Board board){
         this.user = user;
         this.bot = bot;
         this.board = board;
     }
+
+    // Count used for counting the number of nodes visited.
+    int count = 0;
+
+
+    
+    // The only public method for this class, returns the AI's best move (which consists of a board and position)
+    // The boardNumber from the move is ignored for regular TTT.
+    
     public Move getAIMove(){
         int maxScore = -Integer.MAX_VALUE;
         Move move = null;
@@ -15,7 +29,6 @@ public class AdversarialSearch {
             Board copy = board.deepClone();
             copy.move( test.getBoard(), test.getPosition(), bot);
             int score = minimaxWithAlphaBeta(copy, -Integer.MAX_VALUE, Integer.MAX_VALUE, false);
-//            board.undoMove(test.getBoard(), test.getPosition());
             if (score > maxScore){
                 move = test;
                 maxScore = score;
@@ -24,12 +37,16 @@ public class AdversarialSearch {
 
         }
         long elapsed = System.currentTimeMillis() - start;
-        System.out.println(elapsed);
+        System.err.println("Minimax Alpha Beta Stats");
+        System.err.println("Elapsed Time (ms): " + elapsed);
+        System.err.println("Nodes Visited: " + count);
         return move;
     }
 
 
     private int minimaxWithAlphaBeta(Board board, int alpha, int beta, boolean isMax){
+        count++;
+
         if (board.isGameOver()){
 
             return score(board);
@@ -47,9 +64,8 @@ public class AdversarialSearch {
             Board copy = board.deepClone();
             copy.move(i.getBoard(), i.getPosition(), bot);
             int score = minimaxWithAlphaBeta(copy, alpha, beta, false);
-//            board.undoMove(i.getBoard(), i.getPosition());
 
-            if (score >= alpha){
+            if (score > alpha){
                 alpha = score;
             }
             if (alpha >= beta){
@@ -63,23 +79,18 @@ public class AdversarialSearch {
     public int getMinWithAlphaBeta(Board board, int alpha, int beta){
 
         for (Move i: board.getPossibleMoves()){
-
             Board copy = board.deepClone();
             copy.move(i.getBoard(), i.getPosition(), user);
             int score = minimaxWithAlphaBeta(copy, alpha, beta, true);
-//            board.undoMove(i.getBoard(), i.getPosition());
-
-            if (score <= beta){
+            if (score < beta){
                 beta = score;
             }
 
 
-                if (alpha >= beta){
+            if (alpha >= beta){
 
-                    return beta;
-                }
-
-
+                return beta;
+            }
 
         }
         return beta;
@@ -104,8 +115,10 @@ public class AdversarialSearch {
             return score(board);
 
         }
+        count++;
 
         if (isMax){
+
             return getMax(board);
         }else{
             return getMin(board);
@@ -113,20 +126,20 @@ public class AdversarialSearch {
     }
 
     public  int getMax(Board board){
-        int maxScore = -1000;
+        int maxScore = -Integer.MAX_VALUE;
 
         for (Move i: board.getPossibleMoves()){
+            Board copy = board.deepClone();
 
 
-            board.move(i.getBoard(), i.getPosition(), bot);
-                int score = minimax(board, false);
+            copy.move(i.getBoard(), i.getPosition(), bot);
+                int score = minimax(copy, false);
 
 
 
                 if (score > maxScore){
                     maxScore = score;
                 }
-                board.undoMove(i.getBoard(), i.getPosition());
 
 
             }
@@ -138,14 +151,14 @@ public class AdversarialSearch {
         int minScore = 1000;
         for (Move i: board.getPossibleMoves()){
 
+            Board copy = board.deepClone();
 
-            board.move(i.getBoard(), i.getPosition(), user);
-                int score = minimax(board, true);
+            copy.move(i.getBoard(), i.getPosition(), user);
+                int score = minimax(copy, true);
 
                 if (score < minScore){
                     minScore = score;
                 }
-                board.undoMove(i.getBoard(), i.getPosition());
 
 
         }
@@ -153,29 +166,28 @@ public class AdversarialSearch {
         return minScore;
     }
 
-    //     regular minimax
-
-//    public void getAIMove(){
-//        int maxScore = -1000;
-//        int move = -1;
-//        long start = System.currentTimeMillis();
+//    //     regular minimax
 //
-//        for (int i = 1; i<=9; i++){
-//            if (!board.isTileTaken(i)){
-//                board.move(i, bot);
-//                int score = minimax(board, false);
-//                board.undoMove(i);
-//                if (score > maxScore){
-//                    move = i;
-//                    maxScore = score;
-//                }
+//    public Move getAIMove() {
+//        int maxScore = -Integer.MAX_VALUE;
+//        Move move = null;
+//        long start = System.currentTimeMillis();
+//        for (Move test : board.getPossibleMoves()) {
+//            Board copy = board.deepClone();
+//            copy.move(test.getBoard(), test.getPosition(), bot);
+//            int score = minimax(copy, false);
+//            if (score > maxScore) {
+//                move = test;
+//                maxScore = score;
 //            }
+//
 //
 //        }
 //        long elapsed = System.currentTimeMillis() - start;
-//        System.out.println(elapsed);
-//
-//        board.move(move, bot);
+//        System.err.println("Minimax Stats");
+//        System.err.println("Elapsed Time (ms): " + elapsed);
+//        System.err.println("Nodes visited: " + count);
+//        return move;
 //
 //
 //    }

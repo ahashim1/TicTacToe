@@ -16,6 +16,8 @@ public class Board implements State, Serializable {
         initializeBoard();
     }
 
+
+//    Deep Clone from: https://www.avajava.com/tutorials/lessons/how-do-i-perform-a-deep-clone-using-serializable.html
     public Board deepClone() {
         try {
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -41,16 +43,9 @@ public class Board implements State, Serializable {
         turn = turn == Mark.X ? Mark.O: Mark.X;
     }
 
-
-
     public  boolean isGameOver(){
         return isGameOver;
     }
-//    public  boolean isGameFull() {
-//        return isGameOver && getWinner() == Mark.BLANK;
-//    } public Mark getWinner(){
-//        return winner;
-//    }
 
     public void initializeBoard(){
         for (int i = 0; i < boardSize; i++){
@@ -117,17 +112,6 @@ public class Board implements State, Serializable {
         changeTurn();
         return true;
     }
-
-    public void undoMove(int boardInput, int input){
-
-        int row = (input - 1) / boardSize;
-        int col = (input - 1) % boardSize;
-        winner = Mark.BLANK;
-        isGameOver = false;
-        changeTurn();
-        board[row][col] = Mark.BLANK;
-    }
-
 
     private boolean checkColumn(int col, Mark mark){
         for (int i = 0; i < boardSize; i++){

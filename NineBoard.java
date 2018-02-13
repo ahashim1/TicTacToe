@@ -14,6 +14,7 @@ public class NineBoard implements State, Serializable{
         initializeBoard();
     }
 
+    //    Deep Clone from: https://www.avajava.com/tutorials/lessons/how-do-i-perform-a-deep-clone-using-serializable.html
     public NineBoard deepClone() {
         try {
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -169,4 +170,20 @@ public class NineBoard implements State, Serializable{
 
         return arr;
     }
+    public int numberFreePlays(int boardInput){
+        int freePlays = 0;
+
+        for (int i = 1; i<=9; i++){
+
+            if (!getBoardWith(boardInput).isTileTaken(i)){
+                if (getBoardWith(i).isGameOver()){
+                    freePlays++;
+                }
+            }
+        }
+
+
+        return freePlays;
+    }
+
 }
