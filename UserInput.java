@@ -22,7 +22,17 @@ public class UserInput {
 
 
             if (board.isGameOver()){
-                break;
+                if (board.getWinner() == Mark.BLANK){
+                    System.out.println("Draw");
+                    board = new Board();
+                    start();
+                }
+
+
+
+                System.out.println(board.getWinner() + " Won!");
+                board = new Board();
+                start();
             }
         }
     }

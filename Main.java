@@ -1,3 +1,6 @@
+// Author: Ali Hashim
+
+// Main driver to run tic tac toe. See README.txt for instructions on running.
 public class Main {
 
     public static void main(String[] args) {
@@ -11,7 +14,7 @@ public class Main {
             UltimateTTTUserInput game = new UltimateTTTUserInput();
             game.start();
         }else{
-            System.err.println("Not a valid input.");
+            System.err.println("Not a valid command line argument.");
         }
     }
 

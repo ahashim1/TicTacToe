@@ -1,5 +1,7 @@
 import java.util.Scanner;
 
+// Author: Ali Hashim
+// Class that gets the user's input for NineBoard. Similar to UserInput
 public class NineBoardUserInput {
 
     private NineBoard nineBoard;
@@ -7,11 +9,13 @@ public class NineBoardUserInput {
     static Mark user;
     static Mark bot;
 
+    // Initializes the nineboard.
     public NineBoardUserInput(){
         nineBoard = new NineBoard();
     }
 
 
+    // Same as before
     public void start(){
         setupUser();
         while (true){
@@ -25,11 +29,22 @@ public class NineBoardUserInput {
 
 
             if (nineBoard.isGameOver()){
-                break;
+                if (nineBoard.getWinner() == Mark.BLANK){
+                    System.out.println("Draw");
+                    nineBoard = new NineBoard();
+                    start();
+                }
+
+
+
+                System.out.println(nineBoard.getWinner() + " Won!");
+                nineBoard = new NineBoard();
+                start();
             }
         }
     }
 
+    // Same as before
 
     public void setupUser(){
         System.err.println("Please enter X or O to start the game.");
@@ -47,6 +62,9 @@ public class NineBoardUserInput {
             setupUser();
         }
     }
+
+    // Now has input for board when the user has a free play
+
     public void getPlayerMove(){
         int boardNumber = nineBoard.getActiveBoard();
         int positionNumber;
@@ -84,6 +102,7 @@ public class NineBoardUserInput {
 
     }
 
+    // Gets move and prints it out
     public void getAIMove(){
 
         NineBoardAdversarialSearch search = new NineBoardAdversarialSearch(user, bot, nineBoard);

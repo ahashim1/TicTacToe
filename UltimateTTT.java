@@ -1,6 +1,8 @@
 import java.io.*;
 import java.util.ArrayList;
 
+// Author: Ali Hashim
+// Similar to NineBoard but now has a Board called globalBoard that keeps track of the NineBoard children winners
 public class UltimateTTT implements State, Serializable {
 
     private NineBoard nineBoard;
@@ -31,6 +33,7 @@ public class UltimateTTT implements State, Serializable {
         }
     }
 
+// Game is over when the globalBoard is over
     public boolean isGameOver(){
         if (globalBoard.isGameOver()){
             winner = globalBoard.getWinner();
@@ -40,6 +43,7 @@ public class UltimateTTT implements State, Serializable {
         return false;
     }
 
+// Can move when the board is equal to the active board or there is a free play
     public boolean move(int board, int position, Mark user){
         if (globalBoard.isTileTaken(board)){
             activeBoard = -1;
@@ -65,6 +69,7 @@ public class UltimateTTT implements State, Serializable {
 
     }
 
+
     public Mark getTurn(){
         return turn;
     }
@@ -77,6 +82,7 @@ public class UltimateTTT implements State, Serializable {
         return winner;
     }
 
+    // Applicability
     public ArrayList<Move> getPossibleMoves(){
         ArrayList<Move> arr = new ArrayList<>();
 

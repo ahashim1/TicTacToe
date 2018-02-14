@@ -20,15 +20,24 @@ public class AdversarialSearch {
     
     // The only public method for this class, returns the AI's best move (which consists of a board and position)
     // The boardNumber from the move is ignored for regular TTT.
-    
+
     public Move getAIMove(){
-        int maxScore = -Integer.MAX_VALUE;
+        // Initializes values
+        int maxScore = Integer.MIN_VALUE;
         Move move = null;
+
+        // For testing runtime
         long start = System.currentTimeMillis();
+
+        // Goes through possible moves
         for (Move test: board.getPossibleMoves()){
+            // Copies the board to test moves
             Board copy = board.deepClone();
+            // Moves to the position
             copy.move( test.getBoard(), test.getPosition(), bot);
-            int score = minimaxWithAlphaBeta(copy, -Integer.MAX_VALUE, Integer.MAX_VALUE, false);
+            // evaluates the move
+            int score = minimaxWithAlphaBeta(copy, Integer.MIN_VALUE, Integer.MAX_VALUE, false);
+
             if (score > maxScore){
                 move = test;
                 maxScore = score;
@@ -36,6 +45,8 @@ public class AdversarialSearch {
 
 
         }
+
+        // Stats
         long elapsed = System.currentTimeMillis() - start;
         System.err.println("Minimax Alpha Beta Stats");
         System.err.println("Elapsed Time (ms): " + elapsed);
@@ -47,6 +58,7 @@ public class AdversarialSearch {
     private int minimaxWithAlphaBeta(Board board, int alpha, int beta, boolean isMax){
         count++;
 
+        // Test terminal State
         if (board.isGameOver()){
 
             return score(board);
@@ -60,6 +72,9 @@ public class AdversarialSearch {
     }
 
     private int getMaxWithAlphaBeta(Board board, int alpha, int beta){
+
+        // If the score of the move is better than the previous best for max or the alpha, replace the alpha. 
+        // If alpha >= beta, then you can prune
         for (Move i: board.getPossibleMoves()){
             Board copy = board.deepClone();
             copy.move(i.getBoard(), i.getPosition(), bot);
@@ -76,8 +91,10 @@ public class AdversarialSearch {
         return alpha;
     }
 
-    public int getMinWithAlphaBeta(Board board, int alpha, int beta){
+    private int getMinWithAlphaBeta(Board board, int alpha, int beta){
 
+        // If the score of the move is better than the previous best for min or the beta, replace the beta. 
+        // If alpha >= beta, then you can prune
         for (Move i: board.getPossibleMoves()){
             Board copy = board.deepClone();
             copy.move(i.getBoard(), i.getPosition(), user);
@@ -97,6 +114,7 @@ public class AdversarialSearch {
     }
 
 
+    // Evaluates terminal state
     private int score(Board board){
         if (board.getWinner() == bot){
             return 1;
@@ -109,13 +127,17 @@ public class AdversarialSearch {
         }
     }
 
-        public  int minimax(Board board, boolean isMax){
+
+    // These methods are unused, but were used for the first implementations of minimax. 
+    // They are similar to the methods above, but don't keep track of alpha or beta
+    private  int minimax(Board board, boolean isMax){
+        count++;
+
         if (board.isGameOver()){
 
             return score(board);
 
         }
-        count++;
 
         if (isMax){
 
@@ -125,8 +147,8 @@ public class AdversarialSearch {
         }
     }
 
-    public  int getMax(Board board){
-        int maxScore = -Integer.MAX_VALUE;
+    private  int getMax(Board board){
+        int maxScore = Integer.MIN_VALUE;
 
         for (Move i: board.getPossibleMoves()){
             Board copy = board.deepClone();
@@ -148,7 +170,7 @@ public class AdversarialSearch {
     }
 
     public  int getMin(Board board){
-        int minScore = 1000;
+        int minScore = Integer.MAX_VALUE;
         for (Move i: board.getPossibleMoves()){
 
             Board copy = board.deepClone();
@@ -166,7 +188,7 @@ public class AdversarialSearch {
         return minScore;
     }
 
-//    //     regular minimax
+//    //     regular minimax, This is commented out because alpha beta pruning is always used
 //
 //    public Move getAIMove() {
 //        int maxScore = -Integer.MAX_VALUE;

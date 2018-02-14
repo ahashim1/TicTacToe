@@ -1,7 +1,10 @@
+// This class is very similar to AdversarialSearch, with the exception of an implemented heuristic
 public class NineBoardAdversarialSearch {
     Mark user;
     Mark bot;
     NineBoard nineBoard;
+
+    // Sets cutoffDepth to 5
     private int maxDepth = 5;
 
     public NineBoardAdversarialSearch(Mark user, Mark bot, NineBoard nineBoard){
@@ -10,14 +13,17 @@ public class NineBoardAdversarialSearch {
         this.nineBoard = nineBoard;
     }
 
+    // only public method that returns the best move to make
     public Move getAIMove(){
-        int maxScore = -Integer.MAX_VALUE;
+        int maxScore = Integer.MIN_VALUE;
         Move move = null;
 
         for (Move test: nineBoard.getPossibleMoves()) {
+            // makes copy of nineBoard
             NineBoard copy = nineBoard.deepClone();
+            // moves in the test position
             copy.move(test.getBoard(), test.getPosition(), bot);
-            int score = minimaxWithAlphaBeta(copy, -Integer.MAX_VALUE, Integer.MAX_VALUE, false, 0);
+            int score = minimaxWithAlphaBeta(copy, Integer.MIN_VALUE, Integer.MAX_VALUE, false, 0);
             if (score > maxScore) {
                 move = test;
                 maxScore = score;
@@ -28,6 +34,8 @@ public class NineBoardAdversarialSearch {
         return move;
     }
 
+
+// Now has a cutoff test as well
     private int minimaxWithAlphaBeta(NineBoard nineBoard, int alpha, int beta, boolean isMax, int depth){
 
         if (nineBoard.isGameOver() || depth++ == maxDepth){
@@ -42,6 +50,7 @@ public class NineBoardAdversarialSearch {
         }
     }
 
+// Same as in BasicTTT
     private int getMaxWithAlphaBeta(NineBoard nineBoard, int alpha, int beta, int depth){
         for (Move test: nineBoard.getPossibleMoves()) {
             NineBoard copy = nineBoard.deepClone();
@@ -85,6 +94,7 @@ public class NineBoardAdversarialSearch {
         return beta;
     }
 
+// Higher score for win or loss than before so that heuristic can be greater than 1.
     private int score(NineBoard nineBoard){
         if (nineBoard.isGameOver()){
 
@@ -103,11 +113,11 @@ public class NineBoardAdversarialSearch {
 
     }
 
+    // Heuristic evaluation 
     private int heuristic(NineBoard nineBoard){
 
         int sum = 0;
-
-
+        // Evaluates state of each individual board
         for (int boardInput = 1; boardInput<=9; boardInput++) {
             if (nineBoard.isBoardAvailable(boardInput)) {
 
@@ -115,7 +125,9 @@ public class NineBoardAdversarialSearch {
                 sum += evaluateSingleBoard(board);
 
                 int numberFreePlays = nineBoard.numberFreePlays(boardInput);
+                // Weighs free plays as good for MAX and bad for MIN.
                 if (nineBoard.getTurn() == user){
+
                     sum += 2 * numberFreePlays;
                 }else{
                     sum -= 2 * numberFreePlays;
@@ -126,6 +138,7 @@ public class NineBoardAdversarialSearch {
 
     }
 
+
     private int evaluateSingleBoard(Board board){
         int score = 0;
         score += evaluateRows(board);
@@ -135,6 +148,7 @@ public class NineBoardAdversarialSearch {
         return score;
     }
 
+    // These functions go through each row, column, and diagonal and return the score for each
     private int evaluateRows(Board board){
         int score = 0;
 
@@ -155,7 +169,7 @@ public class NineBoardAdversarialSearch {
             if (botCount > 0 && userCount == 0) {
                 score += 2 ^ botCount;
             } else if (botCount == 0 && userCount > 0) {
-                score += 2 ^ userCount;
+                score -= 2 ^ userCount;
             }
         }
         return score;
@@ -179,7 +193,7 @@ public class NineBoardAdversarialSearch {
         if (botCount > 0 && userCount == 0){
             score += 2 ^ botCount;
         }else if (botCount == 0 && userCount > 0){
-            score += 2 ^ userCount;
+            score -= 2 ^ userCount;
         }
 
         return score;

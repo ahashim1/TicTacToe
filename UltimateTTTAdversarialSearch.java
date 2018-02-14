@@ -1,7 +1,11 @@
+// Author Ali Hashim
+// Similar to NineBoardAdversarialSearch
 public class UltimateTTTAdversarialSearch {
     Mark user;
     Mark bot;
     UltimateTTT ultimateTTT;
+
+    // cutoff depth
     private int maxDepth = 5;
 
     public UltimateTTTAdversarialSearch(Mark user, Mark bot, UltimateTTT ultimateTTT){
@@ -10,11 +14,11 @@ public class UltimateTTTAdversarialSearch {
         this.ultimateTTT = ultimateTTT;
     }
 
+// Gets the best AI move.
     public Move getAIMove(){
         int maxScore = -Integer.MAX_VALUE;
         Move move = null;
 
-        System.out.println(ultimateTTT.getPossibleMoves().size());
         for (Move test: ultimateTTT.getPossibleMoves()) {
             UltimateTTT copy = ultimateTTT.deepClone();
             copy.move(test.getBoard(), test.getPosition(), bot);
@@ -29,6 +33,7 @@ public class UltimateTTTAdversarialSearch {
         return move;
     }
 
+    // Same as before but with the UltimateTTT object
     private int minimaxWithAlphaBeta(UltimateTTT ultimateTTT, int alpha, int beta, boolean isMax, int depth){
 
         if (ultimateTTT.isGameOver() || depth++ == maxDepth){
@@ -105,6 +110,7 @@ public class UltimateTTTAdversarialSearch {
 
     }
 
+    // Heuristic is same as before but has a global board evaluation and weighs the free plays more.
     private int heuristic(UltimateTTT ultimateTTT){
 
         int sum = 0;
@@ -158,7 +164,7 @@ public class UltimateTTTAdversarialSearch {
             if (botCount > 0 && userCount == 0) {
                 score += 2 ^ botCount;
             } else if (botCount == 0 && userCount > 0) {
-                score += 2 ^ userCount;
+                score -= 2 ^ userCount;
             }
         }
         return score;
@@ -182,7 +188,7 @@ public class UltimateTTTAdversarialSearch {
         if (botCount > 0 && userCount == 0){
             score += 2 ^ botCount;
         }else if (botCount == 0 && userCount > 0){
-            score += 2 ^ userCount;
+            score -= 2 ^ userCount;
         }
 
         return score;

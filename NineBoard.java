@@ -1,6 +1,8 @@
 import java.io.*;
 import java.util.ArrayList;
 
+// Author: Ali Hashim
+// Class that keeps track of the NineBoard state. A good amount of code is redundant from the Board.java class
 public class NineBoard implements State, Serializable{
 
     private int numBoards = 9;
@@ -31,15 +33,20 @@ public class NineBoard implements State, Serializable{
         }
     }
 
+
+    // Gets the active board or the board the player has to play in. returns -1 if there is a free play.
     public int getActiveBoard(){
         return activeBoard;
     }
+
+    // Helper to return the Board with an input from 1-9
     public Board getBoardWith(int input){
         int boardRow = (input - 1)/3;
         int boardCol = (input - 1)%3;
         return nineBoard[boardRow][boardCol];
     }
 
+    // Initializes the 9-board by initializing the array with Boards
     public void initializeBoard(){
         for (int i = 0; i < numBoards/3; i++){
             for (int j = 0; j<numBoards/3; j++){
@@ -47,6 +54,8 @@ public class NineBoard implements State, Serializable{
             }
         }
     }
+
+    // Ugly method to print the board.
     public void printBoard(){
 
         for (int boardRow = 0; boardRow<3; boardRow++){
@@ -86,8 +95,11 @@ public class NineBoard implements State, Serializable{
         }
     }
 
+    // helper function for possible moves
     public boolean isBoardAvailable(int boardInput){
         Board board = getBoardWith(boardInput);
+
+        // If the board is drawn return false.
         if (board.isGameOver() && board.getWinner() == Mark.BLANK){
             return false;
         }
@@ -95,8 +107,22 @@ public class NineBoard implements State, Serializable{
         return true;
     }
 
+    // Tests terminal state
     public boolean isGameOver(){
 
+        // Tests draw case.
+        for (int i = 0; i<(numBoards/3); i++){
+            for (int j = 0; j<(numBoards/3); j++){
+                if (nineBoard[i][j].isGameOver() && nineBoard[i][j].getWinner() == Mark.BLANK){
+                    if (i == 2 && j == 2){
+                        winner = Mark.BLANK;
+                        return true;
+                    }
+                }else{
+                    break;
+                }
+            }
+        }
 
         for (int i = 0; i<(numBoards/3); i++){
 
@@ -107,24 +133,26 @@ public class NineBoard implements State, Serializable{
                     winner = board.getWinner();
                     return true;
                 }
-//
-//                // Available spots
-//                if (!board.isGameFull()){
-//                    return false;
-//                }
+
             }
         }
-        // draw
         return false;
     }
 
+
+    // Action for 9 board
     public boolean move(int board, int position, Mark user){
         int boardRow = (board - 1)/3;
         int boardCol = (board - 1)%3;
+
+        // Moves in an individual board
         if (!nineBoard[boardRow][boardCol].move(activeBoard, position, user)){
             return false;
         }
+
+        // Changes the activeBoard
         activeBoard = position;
+        // Toggles turn
         changeTurn();
         return true;
     }
@@ -141,9 +169,11 @@ public class NineBoard implements State, Serializable{
         turn = turn == Mark.X ? Mark.O : Mark.X;
     }
 
+    // Applicability
     public ArrayList<Move> getPossibleMoves() {
         ArrayList<Move> arr = new ArrayList<Move>();
 
+        // free move
         if (activeBoard != -1){
             if (!isBoardAvailable(activeBoard)){
                 activeBoard = -1;
@@ -170,6 +200,8 @@ public class NineBoard implements State, Serializable{
 
         return arr;
     }
+
+    
     public int numberFreePlays(int boardInput){
         int freePlays = 0;
 

@@ -1,5 +1,7 @@
 import java.util.Scanner;
 
+// Author: Ali Hashim
+// Quite similar to NineBoardUserInput. Could probably use extends.
 public class UltimateTTTUserInput {
     private UltimateTTT ultimateTTT;
     private Scanner input = new Scanner(System.in);
@@ -24,7 +26,17 @@ public class UltimateTTTUserInput {
 
 
             if (ultimateTTT.isGameOver()){
-                break;
+                if (ultimateTTT.getWinner() == Mark.BLANK){
+                    System.out.println("Draw");
+                    ultimateTTT = new UltimateTTT();
+                    start();
+                }
+
+
+
+                System.out.println(ultimateTTT.getWinner() + " Won!");
+                ultimateTTT = new UltimateTTT();
+                start();
             }
         }
     }

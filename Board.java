@@ -1,3 +1,4 @@
+// Author Ali Hashim
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -5,10 +6,20 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
+
+// This class defines the state for the basic TTT board.
 public class Board implements State, Serializable {
+
+    // boardSize of 3 for TTT
     private int boardSize = 3;
+
+    // Main underlying data structure is a 2d array of Marks
     private Mark[][] board = new Mark[boardSize][boardSize];
+
+    // First player is X
     private Mark turn = Mark.X;
+
+    // Sets variables to default
     private boolean isGameOver = false;
     private Mark winner = Mark.BLANK;
 
@@ -35,18 +46,22 @@ public class Board implements State, Serializable {
     }
 
 
+    // gets the player's turn
     public Mark getTurn(){
         return turn;
     }
 
+    // toggles which turn it is
     public void changeTurn(){
         turn = turn == Mark.X ? Mark.O: Mark.X;
     }
 
+    // tests terminal state
     public  boolean isGameOver(){
         return isGameOver;
     }
 
+    // initializes the board with blanks (initial state)
     public void initializeBoard(){
         for (int i = 0; i < boardSize; i++){
             for (int j = 0; j<boardSize; j++){
@@ -55,6 +70,7 @@ public class Board implements State, Serializable {
         }
     }
 
+    // gets applicable actions
     public ArrayList<Move> getPossibleMoves(){
         ArrayList<Move> arr = new ArrayList<>();
         for (int i = 1; i<=9; i++){
@@ -64,6 +80,8 @@ public class Board implements State, Serializable {
         }
         return arr;
     }
+
+    // helper to get applicable actions
     public boolean isTileTaken(int input){
         Mark tile = getTileValueWith(input);
         if (tile == Mark.BLANK){
@@ -74,6 +92,8 @@ public class Board implements State, Serializable {
         return true;
     }
 
+
+    // Converts 1-9 input to row and col values and returns the value
     public Mark getTileValueWith(int input){
         int row = (input - 1) / boardSize;
         int col = (input - 1) % boardSize;
@@ -84,6 +104,8 @@ public class Board implements State, Serializable {
         return board[row][col];
     }
 
+
+    // Action function
     public boolean move(int boardNo, int input, Mark player){
 
         if (isTileTaken(input)){
@@ -94,6 +116,7 @@ public class Board implements State, Serializable {
         int col = (input - 1) % boardSize;
         board[row][col] = player;
 
+        // checks goalState 
         if (checkColumn(col, player) || checkRow(row, player) || checkDiag(row, col, player) || checkAntiDiag(row, col, player)){
             isGameOver = true;
             winner = player;
@@ -101,7 +124,7 @@ public class Board implements State, Serializable {
             return true;
         }
 
-
+        // checks draw state
 
         if (checkDraw()){
             isGameOver = true;
@@ -109,6 +132,7 @@ public class Board implements State, Serializable {
         }
 
 
+        // toggles player
         changeTurn();
         return true;
     }
